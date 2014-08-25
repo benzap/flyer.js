@@ -1,0 +1,6 @@
+* Introduction
+  flyer.js is a lightweight messaging framework written for
+  clojurescript & javascript to provide broadcast messaging between
+  frames, iframes, and windows.
+
+/In the beginning stages of development/
