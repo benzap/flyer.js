@@ -23466,5 +23466,93 @@ cljs.core.special_symbol_QMARK_ = function special_symbol_QMARK_(x) {
   "recur", "recur", -1532142362, null), null, new cljs.core.Symbol(null, ".", ".", -1640531481, null), null, new cljs.core.Symbol(null, "ns", "ns", -1640528002, null), null, new cljs.core.Symbol(null, "do", "do", -1640528316, null), null, new cljs.core.Symbol(null, "fn*", "fn*", -1640430053, null), null, new cljs.core.Symbol(null, "throw", "throw", -1530191713, null), null, new cljs.core.Symbol(null, "letfn*", "letfn*", 1548249632, null), null, new cljs.core.Symbol(null, "js*", "js*", -1640426054, 
   null), null, new cljs.core.Symbol(null, "defrecord*", "defrecord*", 774272013, null), null, new cljs.core.Symbol(null, "let*", "let*", -1637213400, null), null, new cljs.core.Symbol(null, "loop*", "loop*", -1537374273, null), null, new cljs.core.Symbol(null, "try", "try", -1640416396, null), null, new cljs.core.Symbol(null, "if", "if", -1640528170, null), null, new cljs.core.Symbol(null, "def", "def", -1640432194, null), null], null), null), x);
 };
+goog.provide("flyer.traversal");
+goog.require("cljs.core");
+flyer.traversal.is_frame_QMARK_ = function is_frame_QMARK_(window) {
+  var parent_window = window.parent;
+  var current_location = window.location;
+  var parent_location = parent_window.location;
+  return cljs.core.not_EQ_.call(null, current_location, parent_location);
+};
+flyer.traversal.get_main_parent = function() {
+  var get_main_parent = null;
+  var get_main_parent__0 = function() {
+    return get_main_parent.call(null, window);
+  };
+  var get_main_parent__1 = function(window) {
+    if (flyer.traversal.is_frame_QMARK_.call(null, window)) {
+      return get_main_parent.call(null, window.parent);
+    } else {
+      if (new cljs.core.Keyword(null, "else", "else", 1017020587)) {
+        return window;
+      } else {
+        return null;
+      }
+    }
+  };
+  get_main_parent = function(window) {
+    switch(arguments.length) {
+      case 0:
+        return get_main_parent__0.call(this);
+      case 1:
+        return get_main_parent__1.call(this, window);
+    }
+    throw new Error("Invalid arity: " + arguments.length);
+  };
+  get_main_parent.cljs$core$IFn$_invoke$arity$0 = get_main_parent__0;
+  get_main_parent.cljs$core$IFn$_invoke$arity$1 = get_main_parent__1;
+  return get_main_parent;
+}();
+flyer.traversal.list_frame_windows = function list_frame_windows(window) {
+  var framelist = window.frames;
+  var length = framelist.length;
+  var i = 0;
+  var list = cljs.core.PersistentVector.EMPTY;
+  while (true) {
+    if (i < length) {
+      var G__5955 = i + 1;
+      var G__5956 = cljs.core.conj.call(null, list, framelist[i]);
+      i = G__5955;
+      list = G__5956;
+      continue;
+    } else {
+      return list;
+    }
+    break;
+  }
+};
+flyer.traversal.list_external_windows = function list_external_windows(window) {
+  return cljs.core.PersistentVector.EMPTY;
+};
+flyer.traversal.list_all_windows = function list_all_windows(window) {
+  return cljs.core.concat.call(null, flyer.traversal.list_frame_windows.call(null, window), flyer.traversal.list_external_windows.call(null, window));
+};
+flyer.traversal.generate_broadcast_list = function() {
+  var generate_broadcast_list = null;
+  var generate_broadcast_list__0 = function() {
+    return generate_broadcast_list.call(null, flyer.traversal.get_main_parent.call(null));
+  };
+  var generate_broadcast_list__1 = function(current_window) {
+    var current_child_list = flyer.traversal.list_all_windows.call(null, current_window);
+    var map_reduce_fn = cljs.core.comp.call(null, cljs.core.partial.call(null, cljs.core.reduce, cljs.core.concat), cljs.core.partial.call(null, cljs.core.map, generate_broadcast_list));
+    return cljs.core.conj.call(null, map_reduce_fn.call(null, current_child_list), current_window);
+  };
+  generate_broadcast_list = function(current_window) {
+    switch(arguments.length) {
+      case 0:
+        return generate_broadcast_list__0.call(this);
+      case 1:
+        return generate_broadcast_list__1.call(this, current_window);
+    }
+    throw new Error("Invalid arity: " + arguments.length);
+  };
+  generate_broadcast_list.cljs$core$IFn$_invoke$arity$0 = generate_broadcast_list__0;
+  generate_broadcast_list.cljs$core$IFn$_invoke$arity$1 = generate_broadcast_list__1;
+  return generate_broadcast_list;
+}();
 goog.provide("flyer.core");
 goog.require("cljs.core");
+flyer.core.alert2 = function alert2(msg) {
+  return alert([cljs.core.str("alert2:"), cljs.core.str(msg)].join(""));
+};
+goog.exportSymbol("flyer.core.alert2", flyer.core.alert2);
