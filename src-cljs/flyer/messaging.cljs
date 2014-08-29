@@ -5,6 +5,8 @@
                       :channel "default"
                       :topic "*"})
 
+(def default-window js/window)
+
 (defn default-callback [msg]
   (.log js/console msg)
   (.log js/console (clj->js msg)))
@@ -38,7 +40,7 @@
 (defn ^export subscribe
   "subscribe to broadcast messages"
   [& {:keys [window channel topic callback]
-      :or {window js/window
+      :or {window default-window
            channel (:channel default-message)
            topic (:topic default-message)
            callback default-callback}
@@ -53,7 +55,7 @@
             (callback msg-js)))]
     (create-broadcast-listener js/window callback-wrapper)))
 
-(subscribe :window js/window)
+(subscribe)
 ;;(broadcast)
 
 
