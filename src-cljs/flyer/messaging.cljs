@@ -8,8 +8,7 @@
 (def default-window js/window)
 
 (defn default-callback [msg]
-  (.log js/console msg)
-  (.log js/console (clj->js msg)))
+  (.log js/console "callback:" msg))
 
 (defn ^export window-post-message
   "performs the window postback"
@@ -45,17 +44,10 @@
            topic (:topic default-message)
            callback default-callback}
       :as sub}]
-  (.log js/console "window:" js/window)
   (let [callback-wrapper
         (fn [event]
-          (.log js/console event)
           (let [data (.-data event)
                 msg-js (.parse js/JSON data)
                 msg (js->clj msg-js)]
-            (callback msg-js)))]
+            (callback (.-data msg-js))))]
     (create-broadcast-listener js/window callback-wrapper)))
-
-(subscribe)
-;;(broadcast)
-
-

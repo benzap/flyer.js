@@ -1,6 +1,13 @@
-(ns flyer.core)
+(ns flyer.core
+  (:use [flyer.messaging
+         :only [publish subscribe]]))
 
-;;(js/alert "Hello World!")
+(defn ^export main []
+  (subscribe :callback
+             (fn [data]
+               (.log js/console "I am called from parent!"))))
 
-(defn ^:export alert2 [msg]
-  (js/alert (str "alert2:" msg)))
+(defn ^export child []
+  (subscribe :callback
+             (fn [data]
+               (.log js/console "I am called from child!"))))
