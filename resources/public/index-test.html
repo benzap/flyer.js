@@ -31,10 +31,17 @@
 	<iframe src="./frame1-test.html" style=""></iframe>
 	<iframe src="./frame2-test.html" style="right:0;"></iframe>
 
-    <script type="text/javascript" src="./js/flyer-debug.js"></script>
+	<script type="text/javascript" src="./js/flyer-debug.js"></script>
+	<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     <script type="text/javascript">
      flyer.core.main();
 
+     flyer.subscribe({
+       callback: function(data, topic, channel) {
+		 console.log("this is a test");
+	   }
+     });
+     
     </script>
   </body>
 </html>

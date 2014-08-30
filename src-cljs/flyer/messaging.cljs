@@ -56,10 +56,19 @@
   [msg-topic callback-topic]
   (some true?
         [(= callback-topic (default-message :topic))
-         (= msg-topic callback-topic)]))
+         (= msg-topic callback-topic)
+         ;;try and see if it's a regex
+         (try 
+           (string? (re-matches
+                     (re-pattern callback-topic)
+                     msg-topic))
+           (catch js/Error e
+             ;;TODO: include warning when in debug mode
+             nil))]))
 
 (defn like-this-flyer?
-  "determines if the callback should be called based on the channel and the topic"
+  "determines if the callback should be called based on the channel
+and the topic"
   [msg-topic msg-channel
    callback-topic callback-channel]
   (every? true? 
