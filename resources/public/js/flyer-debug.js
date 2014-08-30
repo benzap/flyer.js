@@ -23567,58 +23567,58 @@ flyer.messaging.window_post_message = function window_post_message(window, msg) 
   return window.postMessage(data_json, "*");
 };
 flyer.messaging.broadcast = function() {
-  var broadcast__delegate = function(p__5440) {
-    var map__5446 = p__5440;
-    var map__5446__$1 = cljs.core.seq_QMARK_.call(null, map__5446) ? cljs.core.apply.call(null, cljs.core.hash_map, map__5446) : map__5446;
-    var topic = cljs.core.get.call(null, map__5446__$1, new cljs.core.Keyword(null, "topic", "topic", 1124450465), (new cljs.core.Keyword(null, "topic", "topic", 1124450465)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
-    var channel = cljs.core.get.call(null, map__5446__$1, new cljs.core.Keyword(null, "channel", "channel", 1752854645), (new cljs.core.Keyword(null, "channel", "channel", 1752854645)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
-    var data = cljs.core.get.call(null, map__5446__$1, new cljs.core.Keyword(null, "data", "data", 1016980252), (new cljs.core.Keyword(null, "data", "data", 1016980252)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
+  var broadcast__delegate = function(p__5470) {
+    var map__5476 = p__5470;
+    var map__5476__$1 = cljs.core.seq_QMARK_.call(null, map__5476) ? cljs.core.apply.call(null, cljs.core.hash_map, map__5476) : map__5476;
+    var topic = cljs.core.get.call(null, map__5476__$1, new cljs.core.Keyword(null, "topic", "topic", 1124450465), (new cljs.core.Keyword(null, "topic", "topic", 1124450465)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
+    var channel = cljs.core.get.call(null, map__5476__$1, new cljs.core.Keyword(null, "channel", "channel", 1752854645), (new cljs.core.Keyword(null, "channel", "channel", 1752854645)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
+    var data = cljs.core.get.call(null, map__5476__$1, new cljs.core.Keyword(null, "data", "data", 1016980252), (new cljs.core.Keyword(null, "data", "data", 1016980252)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
     var msg = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null, "data", "data", 1016980252), data, new cljs.core.Keyword(null, "channel", "channel", 1752854645), channel, new cljs.core.Keyword(null, "topic", "topic", 1124450465), topic], null);
     var msg_js = cljs.core.clj__GT_js.call(null, msg);
     var broadcast_list = flyer.traversal.generate_broadcast_list.call(null);
-    var seq__5447 = cljs.core.seq.call(null, broadcast_list);
-    var chunk__5448 = null;
-    var count__5449 = 0;
-    var i__5450 = 0;
+    var seq__5477 = cljs.core.seq.call(null, broadcast_list);
+    var chunk__5478 = null;
+    var count__5479 = 0;
+    var i__5480 = 0;
     while (true) {
-      if (i__5450 < count__5449) {
-        var window = cljs.core._nth.call(null, chunk__5448, i__5450);
+      if (i__5480 < count__5479) {
+        var window = cljs.core._nth.call(null, chunk__5478, i__5480);
         flyer.messaging.window_post_message.call(null, window, msg);
-        var G__5451 = seq__5447;
-        var G__5452 = chunk__5448;
-        var G__5453 = count__5449;
-        var G__5454 = i__5450 + 1;
-        seq__5447 = G__5451;
-        chunk__5448 = G__5452;
-        count__5449 = G__5453;
-        i__5450 = G__5454;
+        var G__5481 = seq__5477;
+        var G__5482 = chunk__5478;
+        var G__5483 = count__5479;
+        var G__5484 = i__5480 + 1;
+        seq__5477 = G__5481;
+        chunk__5478 = G__5482;
+        count__5479 = G__5483;
+        i__5480 = G__5484;
         continue;
       } else {
-        var temp__4126__auto__ = cljs.core.seq.call(null, seq__5447);
+        var temp__4126__auto__ = cljs.core.seq.call(null, seq__5477);
         if (temp__4126__auto__) {
-          var seq__5447__$1 = temp__4126__auto__;
-          if (cljs.core.chunked_seq_QMARK_.call(null, seq__5447__$1)) {
-            var c__4226__auto__ = cljs.core.chunk_first.call(null, seq__5447__$1);
-            var G__5455 = cljs.core.chunk_rest.call(null, seq__5447__$1);
-            var G__5456 = c__4226__auto__;
-            var G__5457 = cljs.core.count.call(null, c__4226__auto__);
-            var G__5458 = 0;
-            seq__5447 = G__5455;
-            chunk__5448 = G__5456;
-            count__5449 = G__5457;
-            i__5450 = G__5458;
+          var seq__5477__$1 = temp__4126__auto__;
+          if (cljs.core.chunked_seq_QMARK_.call(null, seq__5477__$1)) {
+            var c__4226__auto__ = cljs.core.chunk_first.call(null, seq__5477__$1);
+            var G__5485 = cljs.core.chunk_rest.call(null, seq__5477__$1);
+            var G__5486 = c__4226__auto__;
+            var G__5487 = cljs.core.count.call(null, c__4226__auto__);
+            var G__5488 = 0;
+            seq__5477 = G__5485;
+            chunk__5478 = G__5486;
+            count__5479 = G__5487;
+            i__5480 = G__5488;
             continue;
           } else {
-            var window = cljs.core.first.call(null, seq__5447__$1);
+            var window = cljs.core.first.call(null, seq__5477__$1);
             flyer.messaging.window_post_message.call(null, window, msg);
-            var G__5459 = cljs.core.next.call(null, seq__5447__$1);
-            var G__5460 = null;
-            var G__5461 = 0;
-            var G__5462 = 0;
-            seq__5447 = G__5459;
-            chunk__5448 = G__5460;
-            count__5449 = G__5461;
-            i__5450 = G__5462;
+            var G__5489 = cljs.core.next.call(null, seq__5477__$1);
+            var G__5490 = null;
+            var G__5491 = 0;
+            var G__5492 = 0;
+            seq__5477 = G__5489;
+            chunk__5478 = G__5490;
+            count__5479 = G__5491;
+            i__5480 = G__5492;
             continue;
           }
         } else {
@@ -23629,16 +23629,16 @@ flyer.messaging.broadcast = function() {
     }
   };
   var broadcast = function(var_args) {
-    var p__5440 = null;
+    var p__5470 = null;
     if (arguments.length > 0) {
-      p__5440 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0);
+      p__5470 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0);
     }
-    return broadcast__delegate.call(this, p__5440);
+    return broadcast__delegate.call(this, p__5470);
   };
   broadcast.cljs$lang$maxFixedArity = 0;
-  broadcast.cljs$lang$applyTo = function(arglist__5463) {
-    var p__5440 = cljs.core.seq(arglist__5463);
-    return broadcast__delegate(p__5440);
+  broadcast.cljs$lang$applyTo = function(arglist__5493) {
+    var p__5470 = cljs.core.seq(arglist__5493);
+    return broadcast__delegate(p__5470);
   };
   broadcast.cljs$core$IFn$_invoke$arity$variadic = broadcast__delegate;
   return broadcast;
@@ -23674,15 +23674,15 @@ flyer.messaging.like_this_flyer_QMARK_ = function like_this_flyer_QMARK_(msg_top
   return cljs.core.every_QMARK_.call(null, cljs.core.true_QMARK_, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [flyer.messaging.like_this_channel_QMARK_.call(null, msg_channel, callback_channel), flyer.messaging.like_this_topic_QMARK_.call(null, msg_topic, callback_topic)], null));
 };
 flyer.messaging.subscribe = function() {
-  var subscribe__delegate = function(p__5464) {
-    var map__5466 = p__5464;
-    var map__5466__$1 = cljs.core.seq_QMARK_.call(null, map__5466) ? cljs.core.apply.call(null, cljs.core.hash_map, map__5466) : map__5466;
-    var sub = map__5466__$1;
-    var callback = cljs.core.get.call(null, map__5466__$1, new cljs.core.Keyword(null, "callback", "callback", 841683895), flyer.messaging.default_callback);
-    var topic = cljs.core.get.call(null, map__5466__$1, new cljs.core.Keyword(null, "topic", "topic", 1124450465), (new cljs.core.Keyword(null, "topic", "topic", 1124450465)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
-    var channel = cljs.core.get.call(null, map__5466__$1, new cljs.core.Keyword(null, "channel", "channel", 1752854645), (new cljs.core.Keyword(null, "channel", "channel", 1752854645)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
-    var window = cljs.core.get.call(null, map__5466__$1, new cljs.core.Keyword(null, "window", "window", 4521119586), flyer.messaging.default_window);
-    var callback_wrapper = function(map__5466, map__5466__$1, sub, callback, topic, channel, window) {
+  var subscribe__delegate = function(p__5494) {
+    var map__5496 = p__5494;
+    var map__5496__$1 = cljs.core.seq_QMARK_.call(null, map__5496) ? cljs.core.apply.call(null, cljs.core.hash_map, map__5496) : map__5496;
+    var sub = map__5496__$1;
+    var callback = cljs.core.get.call(null, map__5496__$1, new cljs.core.Keyword(null, "callback", "callback", 841683895), flyer.messaging.default_callback);
+    var topic = cljs.core.get.call(null, map__5496__$1, new cljs.core.Keyword(null, "topic", "topic", 1124450465), (new cljs.core.Keyword(null, "topic", "topic", 1124450465)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
+    var channel = cljs.core.get.call(null, map__5496__$1, new cljs.core.Keyword(null, "channel", "channel", 1752854645), (new cljs.core.Keyword(null, "channel", "channel", 1752854645)).cljs$core$IFn$_invoke$arity$1(flyer.messaging.default_message));
+    var window = cljs.core.get.call(null, map__5496__$1, new cljs.core.Keyword(null, "window", "window", 4521119586), flyer.messaging.default_window);
+    var callback_wrapper = function(map__5496, map__5496__$1, sub, callback, topic, channel, window) {
       return function(event) {
         var data = event.data;
         var msg_js = JSON.parse(data);
@@ -23696,20 +23696,20 @@ flyer.messaging.subscribe = function() {
           return null;
         }
       };
-    }(map__5466, map__5466__$1, sub, callback, topic, channel, window);
+    }(map__5496, map__5496__$1, sub, callback, topic, channel, window);
     return flyer.messaging.create_broadcast_listener.call(null, window, callback_wrapper);
   };
   var subscribe = function(var_args) {
-    var p__5464 = null;
+    var p__5494 = null;
     if (arguments.length > 0) {
-      p__5464 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0);
+      p__5494 = cljs.core.array_seq(Array.prototype.slice.call(arguments, 0), 0);
     }
-    return subscribe__delegate.call(this, p__5464);
+    return subscribe__delegate.call(this, p__5494);
   };
   subscribe.cljs$lang$maxFixedArity = 0;
-  subscribe.cljs$lang$applyTo = function(arglist__5467) {
-    var p__5464 = cljs.core.seq(arglist__5467);
-    return subscribe__delegate(p__5464);
+  subscribe.cljs$lang$applyTo = function(arglist__5497) {
+    var p__5494 = cljs.core.seq(arglist__5497);
+    return subscribe__delegate(p__5494);
   };
   subscribe.cljs$core$IFn$_invoke$arity$variadic = subscribe__delegate;
   return subscribe;

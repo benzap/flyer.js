@@ -62,8 +62,9 @@
   "determines if the callback should be called based on the channel and the topic"
   [msg-topic msg-channel
    callback-topic callback-channel]
-  (every? true? [(like-this-channel? msg-channel callback-channel)
-                 (like-this-topic? msg-topic callback-topic)]))
+  (every? true? 
+          [(like-this-channel? msg-channel callback-channel)
+           (like-this-topic? msg-topic callback-topic)]))
 
 (defn ^export subscribe
   "subscribe to broadcast messages"
