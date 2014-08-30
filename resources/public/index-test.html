@@ -34,11 +34,26 @@
 	<script type="text/javascript" src="./js/flyer-debug.js"></script>
 	<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     <script type="text/javascript">
-     flyer.core.main();
+	 var button = document.getElementById("main-button");
+	 button.addEventListener(
+	   "click",
+	   function(event) {
+		 flyer.broadcast({
+		   topic: "general.button",
+		   data: {buttonId: "main-button"},
+		 });
 
+		 console.log("Button Pressed");
+		 
+	   });
+	 
      flyer.subscribe({
+	   topic: "general.*",
        callback: function(data, topic, channel) {
-		 console.log("this is a test");
+		 console.log("called from main");
+		 console.log("data: ", data);
+		 console.log("topic: ", topic);
+		 console.log("channel: ", channel);
 	   }
      });
      

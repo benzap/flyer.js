@@ -19,7 +19,7 @@
   (.log js/console "callback-topic:" topic)
   (.log js/console "callback-channel:" channel))
 
-(defn ^export window-post-message
+(defn window-post-message
   "performs the window postback"
   [window msg]
   (let [data-js (clj->js msg)
@@ -27,7 +27,7 @@
     ;;TODO: this should include a good origin
     (.postMessage window data-json "*")))
 
-(defn ^export broadcast
+(defn broadcast
   "broadcast message to currently active frames"
   [& {:keys [data channel topic]
       :or {data (:data default-message)
@@ -39,7 +39,7 @@
     (doseq [window broadcast-list] 
          (window-post-message window msg))))
 
-(defn ^export create-broadcast-listener
+(defn create-broadcast-listener
   "used to subscribe to the broadcast messages this takes advantage of
   message postback"
   ([window callback]
@@ -75,7 +75,7 @@ and the topic"
           [(like-this-channel? msg-channel callback-channel)
            (like-this-topic? msg-topic callback-topic)]))
 
-(defn ^export subscribe
+(defn subscribe
   "subscribe to broadcast messages"
   [& {:keys [window channel topic callback]
       :or {window default-window

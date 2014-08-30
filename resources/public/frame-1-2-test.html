@@ -12,8 +12,13 @@
     <h1>I am frame two in one</h1>
     
     <script type="text/javascript" src="./js/flyer-debug.js"></script>
+	<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     <script type="text/javascript">
-      flyer.core.child()
+     flyer.subscribe({
+	   callback: function(data, topic, channel) {
+		 console.log("called from child!");
+	   },
+	 });
     </script>
   </body>
 </html>

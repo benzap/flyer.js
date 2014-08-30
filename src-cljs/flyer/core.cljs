@@ -2,13 +2,13 @@
   (:use [flyer.messaging
          :only [broadcast subscribe]]))
 
-(defn ^export main []
+#_(defn ^export main []
   (subscribe 
    :callback
    (fn [data]
      (.log js/console "I am called from parent!"))))
 
-(defn ^export child []
+#_(defn ^export child []
   (subscribe 
    :topic "general"
    :callback
@@ -18,7 +18,7 @@
      (.log js/console "data: " data)
      (.log js/console "data: " data))))
 
-(if-let [button (.getElementById js/document "main-button")]
+#_(if-let [button (.getElementById js/document "main-button")]
   (do 
     (.log js/console "button found!")
     (.addEventListener 
