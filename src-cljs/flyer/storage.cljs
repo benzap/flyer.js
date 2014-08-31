@@ -11,12 +11,14 @@
 
 (def window-list-key "flyer_WindowReferences")
 
-(defn set-window-set! [w-list]
+(defn set-window-set!
+  "Set the set of window references stored in the session storage"
+  [w-list]
   (let [set-string (prn-str w-list)]
     (aset storage window-list-key set-string)))
 
 (defn get-window-set
-  "Get the list of windows stored in the session storage"
+  "Get the set of window references stored in the session storage"
   []
   (let [window-str (aget storage window-list-key)]
     (when (string? window-str)
