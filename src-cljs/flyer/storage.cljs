@@ -1,18 +1,43 @@
 (ns flyer.storage
   "includes functions for storing window information"
-  (:require [cljs.reader :as reader]))
+  (:require [cljs.reader :as reader]
+            [flyer.utils :as utils]))
 
-;;init local session storage
+
+(def storage
+  (let [parent (utils/get-main-parent)
+        session (.-localStorage parent)]
+    session))
+
+(def window-list-key "flyerWindowReferences")
+
+(defn set-window-set! [w-list]
+  (let [set-string (prn-str w-list)]
+    (aset storage window-list-key set-string)))
+
+(defn get-window-set
+  "Get the list of windows stored in the session storage"
+  []
+  (let [window-str (aget storage window-list-key)
+        windows (reader/read-string window-str)]
+    windows))
+
+(defn init []
+  (let [window-list (get-window-set)]
+    (when (nil? window-list)
+      (set-window-set! #{}))))
 
 (defn remove-window-name!
   "remove window from set, if it exists"
-  [name])
+  [name]
+  (let [windows (get-window-set)]
+    (set-window-set! (disj windows name))))
 
 (defn insert-window-name!
   "insert window into set"
   [name]
-  (aset js/sessionStorage "test" name))
+  (let [windows (get-window-set)]
+    (set-window-set! (conj windows name))))
 
-(defn get-window-list
-  
-  [])
+;;init local session storage
+(init)
