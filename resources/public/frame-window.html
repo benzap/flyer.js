@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Frame-window</title>
+    <style>
+     body {
+       background-color: #ccccff;
+     }
+    </style>
+  </head>
+  <body>
+    <h1>I am a frame window</h1>
+    
+    <script type="text/javascript" src="./js/flyer-debug.js"></script>
+	<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
+    <script type="text/javascript">
+     flyer.subscribe({
+	   callback: function(data, topic, channel) {
+		 console.log("called from window!");
+	   },
+	 });
+    </script>
+  </body>
+</html>

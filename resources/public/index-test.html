@@ -27,6 +27,7 @@
 	
 	<div id="main">
 	  <button id="main-button">Broadcast</button>
+	  <button id="window-button">Open Window</button>
 	</div>
 	<iframe src="./frame1-test.html" style=""></iframe>
 	<iframe src="./frame2-test.html" style="right:0;"></iframe>
@@ -45,6 +46,13 @@
 
 		 console.log("Button Pressed");
 		 
+	   });
+
+	 var button_window = document.getElementById("window-button");
+	 button_window.addEventListener(
+	   "click",
+	   function(event) {
+		 flyer.window.open("frame-window.html", "window");
 	   });
 	 
      flyer.subscribe({

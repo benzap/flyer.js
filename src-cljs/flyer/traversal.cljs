@@ -1,6 +1,7 @@
 (ns flyer.traversal
   "includes the necessary functions for accumulating all of the
-  iframes, frames, and windows that are currently active.")
+  iframes, frames, and windows that are currently active."
+  (:require [flyer.window :as w]))
 
 (defn is-frame? 
   "Determines whether the current window is a frame within a set of
@@ -22,21 +23,23 @@
 (defn list-frame-windows
   "returns a list of all of the frames that the provided window has"
   [window]
-  (let [framelist (-> window .-frames)
-        length (.-length framelist)]
-    (loop [i 0
-           list []]
-      (if (< i length)
-        (recur (inc i)
-               (conj list (aget framelist i)))
-        list))))
+  (when (not (w/is-window-external? window))
+    (let [framelist (-> window .-frames)
+          length (.-length framelist)]
+      (loop [i 0
+             list []]
+        (if (< i length)
+          (recur (inc i)
+                 (conj list (aget framelist i)))
+          list)))))
 
 (defn list-external-windows
   "returns a list of all external windows linked to the current
   window" 
-  [window] [])
+  [window]
+  (mapv second @w/external-window-list))
 
-(defn list-all-windows 
+(defn list-all-windows
   "generates a list of all frames/windows, etc, that reside in this window"
   [window]
   (concat (list-frame-windows window)
@@ -44,12 +47,17 @@
 
 (defn generate-broadcast-list
   "generates a list of windows that we wish to send the message to"
-  ([current-window]
+  ([current-window & {:keys [first-iteration]
+                      :or {first-iteration nil}}]
      (let [current-child-list 
            (list-all-windows current-window)
            map-reduce-fn
            (comp (partial reduce concat)
                  (partial map generate-broadcast-list))]
-       (conj (map-reduce-fn current-child-list) current-window)))
+       (if (and (not first-iteration)
+                (= current-window (.-top current-window)))
+         (conj (map-reduce-fn current-child-list) current-window)
+         [current-window])))
   ([]
-     (generate-broadcast-list (get-main-parent))))
+     (generate-broadcast-list (get-main-parent
+                               :first-iteration true))))
