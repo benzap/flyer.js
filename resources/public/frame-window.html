@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Frame-window</title>
+    <title>Frame Window</title>
     <style>
      body {
        background-color: #ccccff;
@@ -17,6 +17,9 @@
      flyer.subscribe({
 	   callback: function(data, topic, channel) {
 		 console.log("called from window!");
+		 console.log("data: ", data);
+		 console.log("topic: ", topic);
+		 console.log("channel: ", channel);
 	   },
 	 });
     </script>

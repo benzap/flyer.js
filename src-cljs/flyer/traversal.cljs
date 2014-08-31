@@ -12,12 +12,18 @@
         parent-location (.-location parent-window)]
   (not= current-location parent-location)))
 
+(defn is-external-window?
+  "Determines whether the current window was opened externally"
+  [window]
+  (not (nil? (.-opener window))))
+
 (defn get-main-parent 
   "Finds the main parent by traversing down till it has been determined that it is the parent"
   ([window]
-  (cond 
-   (is-frame? window) (get-main-parent (.-parent window))
-   :else window))
+     (cond
+      (is-external-window? window) (get-main-parent (.-opener window))
+      (is-frame? window) (get-main-parent (.-parent window))
+      :else window))
   ([] (get-main-parent js/window)))
 
 (defn list-frame-windows
@@ -36,28 +42,32 @@
 (defn list-external-windows
   "returns a list of all external windows linked to the current
   window" 
-  [window]
-  (mapv second @w/external-window-list))
+  []
+  (let [window-names
+        (mapv first @w/external-window-list)
+        window-list
+        (mapv #(aget js/window %) window-names)]
+    (filterv #(not (nil? %)) window-list)))
 
 (defn list-all-windows
   "generates a list of all frames/windows, etc, that reside in this window"
   [window]
   (concat (list-frame-windows window)
-          (list-external-windows window)))
+          ;;(list-external-windows)
+          ))
 
 (defn generate-broadcast-list
   "generates a list of windows that we wish to send the message to"
   ([current-window & {:keys [first-iteration]
-                      :or {first-iteration nil}}]
+                      :or {first-iteration false}}]
      (let [current-child-list 
            (list-all-windows current-window)
            map-reduce-fn
            (comp (partial reduce concat)
                  (partial map generate-broadcast-list))]
        (if (and (not first-iteration)
-                (= current-window (.-top current-window)))
-         (conj (map-reduce-fn current-child-list) current-window)
-         [current-window])))
+                (= (.-top current-window) current-window))
+         [current-window]
+         (conj (map-reduce-fn current-child-list) current-window))))
   ([]
-     (generate-broadcast-list (get-main-parent
-                               :first-iteration true))))
+     (generate-broadcast-list (get-main-parent) :first-iteration true)))
