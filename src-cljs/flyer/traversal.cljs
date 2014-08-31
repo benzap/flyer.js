@@ -29,39 +29,26 @@
 (defn list-frame-windows
   "returns a list of all of the frames that the provided window has"
   [window]
-  (when (not (w/is-window-external? window))
-    (let [framelist (-> window .-frames)
-          length (.-length framelist)]
-      (loop [i 0
-             list []]
-        (if (< i length)
-          (recur (inc i)
-                 (conj list (aget framelist i)))
-          list)))))
+  (let [framelist (-> window .-frames)
+        length (.-length framelist)]
+    (loop [i 0
+           list []]
+      (if (< i length)
+        (recur (inc i)
+               (conj list (aget framelist i)))
+        list))))
 
 (defn list-external-windows
   "returns a list of all external windows linked to the current
   window" 
-  []
-  (let [window-names
-        (mapv first @w/external-window-list)
-        window-list
-        (mapv #(aget js/window %) window-names)]
-    (filterv #(not (nil? %)) window-list)))
-
-(defn list-all-windows
-  "generates a list of all frames/windows, etc, that reside in this window"
-  [window]
-  (concat (list-frame-windows window)
-          ;;(list-external-windows)
-          ))
+  [])
 
 (defn generate-broadcast-list
   "generates a list of windows that we wish to send the message to"
   ([current-window & {:keys [first-iteration]
                       :or {first-iteration false}}]
      (let [current-child-list 
-           (list-all-windows current-window)
+           (list-frame-windows current-window)
            map-reduce-fn
            (comp (partial reduce concat)
                  (partial map generate-broadcast-list))]

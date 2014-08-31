@@ -41,7 +41,8 @@
 	   function(event) {
 		 flyer.broadcast({
 		   topic: "general.button",
-		   data: {buttonId: "main-button"},
+		   data: {buttonId: "main-button",
+				  frame: "main"},
 		 });
 
 		 console.log("Button Pressed");

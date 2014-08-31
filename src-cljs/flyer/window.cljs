@@ -23,18 +23,6 @@ external windows that are opened using the 'open' function"
       (apply str (interpose ", " options-inter)))
     (.error js/console "options needs an even number of terms")))
 
-(defn mark-external-window!
-  [w]
-  (aset w "flyer_bMarkExternal" true))
-
-(defn unmark-external-window!
-  [w]
-  (aset w "flyer_bMarkExternal" nil))
-
-(defn is-window-external?
-  [w]
-  (aget w "flyer_bMarkExternal"))
-
 (defn ^export open [url name & options]
   (let [options-str (cond
                      (and (= (count options) 1)
@@ -43,10 +31,7 @@ external windows that are opened using the 'open' function"
                      :else
                      (apply gen-window-options options))
         window (.open this-window url name options-str)]
-    (mark-external-window! window)
-    (aset window "flyer_bMarkExternal" true)
-    (.log js/console "marked" (is-window-external? window))
-    (swap! external-window-list assoc (.-name window) window)1
+    (swap! external-window-list assoc (.-name window) window)
     (.addEventListener
      window "beforeunload"
      (fn [event]

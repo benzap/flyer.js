@@ -10,15 +10,33 @@
   </head>
   <body>
     <h1>I am frame two in one</h1>
+
+    <div id="main">
+	  <button id="main-button">Broadcast</button>
+    </div>
     
     <script type="text/javascript" src="./js/flyer-debug.js"></script>
-	<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
+    <script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     <script type="text/javascript">
+	 var button = document.getElementById("main-button");
+	 button.addEventListener(
+	   "click",
+	   function(event) {
+		 flyer.broadcast({
+		   topic: "general.button",
+		   data: {buttonId: "main-button",
+				  frame: "child-1-2"},
+		 });
+
+		 console.log("Button Pressed");
+		 
+	   });
+	 
      flyer.subscribe({
 	   callback: function(data, topic, channel) {
 		 console.log("called from child!");
 	   },
-	 });
+     });
     </script>
   </body>
 </html>
