@@ -1,4 +1,6 @@
-(ns flyer.window)
+(ns flyer.window
+  (:require [flyer.storage :as storage]
+            [flyer.utils :as utils]))
 
 (def this-window js/window)
 

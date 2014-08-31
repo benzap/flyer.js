@@ -9,7 +9,7 @@
         session (.-localStorage parent)]
     session))
 
-(def window-list-key "flyerWindowReferences")
+(def window-list-key "flyer_WindowReferences")
 
 (defn set-window-set! [w-list]
   (let [set-string (prn-str w-list)]
@@ -18,13 +18,14 @@
 (defn get-window-set
   "Get the list of windows stored in the session storage"
   []
-  (let [window-str (aget storage window-list-key)
-        windows (reader/read-string window-str)]
-    windows))
+  (let [window-str (aget storage window-list-key)]
+    (when (string? window-str)
+      (reader/read-string window-str))))
 
 (defn init []
   (let [window-list (get-window-set)]
     (when (nil? window-list)
+      (.log js/console "Initializing Flyer Session Storage")
       (set-window-set! #{}))))
 
 (defn remove-window-name!
