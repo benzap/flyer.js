@@ -15,7 +15,8 @@
   (not (nil? (.-opener window))))
 
 (defn get-main-parent 
-  "Finds the main parent by traversing down till it has been determined that it is the parent"
+  "Finds the main parent by traversing down till it has been
+determined that it is the parent"
   ([window]
      (cond
       (is-external-window? window) (get-main-parent (.-opener window))

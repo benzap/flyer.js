@@ -10,16 +10,42 @@
   </head>
   <body>
     <h1>I am a frame window</h1>
-    
+    <div id="main">
+	  <button id="main-button">Broadcast</button>
+	  <br />
+	  Call Count: <span id="counter"></span>
+	</div>
     <script type="text/javascript" src="./js/flyer-debug.js"></script>
 	<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     <script type="text/javascript">
+	 //flyer.window.register_external();
+	 
+	 var count = 0;
+
+	 function inc_counter() {
+	   var counter = document.getElementById("counter");
+	   counter.innerHTML = "" + count++;
+	 }
+	 inc_counter();
+
+	 var button = document.getElementById("main-button");
+	 button.addEventListener(
+	   "click",
+	   function(event) {
+		 flyer.broadcast({
+		   topic: "general.button",
+		   data: {buttonId: "main-button",
+				  frame: "window-frame"}
+		 });
+	   });
+	 
      flyer.subscribe({
 	   callback: function(data, topic, channel) {
 		 console.log("called from window!");
 		 console.log("data: ", data);
 		 console.log("topic: ", topic);
 		 console.log("channel: ", channel);
+		 inc_counter();
 	   },
 	 });
     </script>

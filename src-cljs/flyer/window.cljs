@@ -33,15 +33,12 @@ external windows that are opened using the 'open' function"
                      :else
                      (apply gen-window-options options))
         window (.open this-window url name options-str)]
-    ;;(swap! external-window-list assoc (.-name window) window)
-    (storage/insert-window-name! (.-name window))
+    (storage/insert-window-ref! window)
     (.addEventListener
      window "beforeunload"
      (fn [event]
-       (let [name (.-name window)]
-         ;;(swap! external-window-list dissoc (.-name window))
-         (storage/remove-window-name! (.-name window))
-         nil)))
+       (storage/remove-window-ref! window)
+       nil))
     window))
 
 

@@ -21,28 +21,23 @@
   "returns a list of all external windows linked to the current
   window" 
   []
-  (let [window-refs (storage/get-window-set)
-        windows (map #(aget js/window %) window-refs)]
-    (filter #(not (nil? %)) windows)))
+  (vec (storage/get-window-refs)))
 
 (defn generate-broadcast-list
   "generates a list of windows that we wish to send the message to"
-  ([current-window & {:keys [first-iteration]
-                      :or {first-iteration false}}]
-     (let [current-child-list 
+  ([current-window]
+     (let [current-frame-list 
            (list-frame-windows current-window)
            map-reduce-fn
            (comp (partial reduce concat)
                  (partial map generate-broadcast-list))]
-       (if (and (not first-iteration)
-                (= (.-top current-window) current-window))
-         [current-window]
-         (filter #(not (nil? %))
-                 (concat (map-reduce-fn current-child-list)
-                         (when first-iteration
-                           (map-reduce-fn (list-external-windows)))
-                         [current-window])))))
+               (conj (map-reduce-fn current-frame-list)
+                     current-window)))
   ([]
-     (generate-broadcast-list (utils/get-main-parent) :first-iteration true)))
-
-;;(.log js/console (clj->js (generate-broadcast-list)))
+     (let [map-reduce-fn
+           (comp (partial reduce concat)
+                 (partial map generate-broadcast-list))
+           external-windows (list-external-windows)]
+       (concat
+        (generate-broadcast-list (utils/get-main-parent))
+        (map-reduce-fn external-windows)))))
