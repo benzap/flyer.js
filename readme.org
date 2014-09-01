@@ -1,6 +1,6 @@
 * Flyer.js
 
-  [[./doc/intro.svg]]
+  [[./doc/intro.png]]
 
   *flyer.js* is a lightweight messaging library written for
   clojurescript & javascript. 
