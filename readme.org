@@ -15,7 +15,7 @@
     regardless of whether or not they want them (hence, the name)
   - Frames can subscribe to specific channels, and can pattern-match
     to specific topics being sent on that channel
-* Configuration
+* Javascript Configuration
   - Include /flyer.js/ and /flyer-wrapper.js/ at the end of your page
     body
     #+BEGIN_SRC js
@@ -29,6 +29,10 @@
   - In situations where you would use *window.open*, use
     *flyer.window.open* instead. The is required in order to track
     windows references.
+* Download
+  [[./resources/public/js/flyer.js][flyer.js]]
+  
+  [[./resources/public/js/flyer-wrapper.js][flyer-wrapper.js]]
 
 * Javascript API
 ** flyer.broadcast([Options])

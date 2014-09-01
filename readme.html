@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>readme</title>
-<!-- 2014-09-01 Mon 15:51 -->
+<!-- 2014-09-01 Mon 16:12 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Benjamin Zaporzan" />
@@ -142,26 +142,27 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1">1. Flyer.js</a></li>
 <li><a href="#sec-2">2. Features and Operation</a></li>
-<li><a href="#sec-3">3. Configuration</a></li>
-<li><a href="#sec-4">4. Javascript API</a>
+<li><a href="#sec-3">3. Javascript Configuration</a></li>
+<li><a href="#sec-4">4. Download</a></li>
+<li><a href="#sec-5">5. Javascript API</a>
 <ul>
-<li><a href="#sec-4-1">4.1. flyer.broadcast([Options])</a>
+<li><a href="#sec-5-1">5.1. flyer.broadcast([Options])</a>
 <ul>
-<li><a href="#sec-4-1-1">4.1.1. Options</a></li>
-<li><a href="#sec-4-1-2">4.1.2. Examples</a></li>
+<li><a href="#sec-5-1-1">5.1.1. Options</a></li>
+<li><a href="#sec-5-1-2">5.1.2. Examples</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-2">4.2. flyer.subscribe([Options])</a>
+<li><a href="#sec-5-2">5.2. flyer.subscribe([Options])</a>
 <ul>
-<li><a href="#sec-4-2-1">4.2.1. Options</a></li>
-<li><a href="#sec-4-2-2">4.2.2. Examples</a></li>
+<li><a href="#sec-5-2-1">5.2.1. Options</a></li>
+<li><a href="#sec-5-2-2">5.2.2. Examples</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-3">4.3. flyer.window.open(url, name, [Options])</a></li>
+<li><a href="#sec-5-3">5.3. flyer.window.open(url, name, [Options])</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">5. Example</a></li>
-<li><a href="#sec-6">6. Issues</a></li>
+<li><a href="#sec-6">6. Example</a></li>
+<li><a href="#sec-7">7. Issues</a></li>
 </ul>
 </div>
 </div>
@@ -203,7 +204,7 @@ to specific topics being sent on that channel
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Configuration</h2>
+<h2 id="sec-3"><span class="section-number-2">3</span> Javascript Configuration</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>Include <i>flyer.js</i> and <i>flyer-wrapper.js</i> at the end of your page
@@ -228,19 +229,32 @@ windows references.
 </ul>
 </div>
 </div>
+
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Javascript API</h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Download</h2>
 <div class="outline-text-2" id="text-4">
-</div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> flyer.broadcast([Options])</h3>
-<div class="outline-text-3" id="text-4-1">
+<p>
+<a href="./resources/public/js/flyer.js">flyer.js</a>
+</p>
+
+<p>
+<a href="./resources/public/js/flyer-wrapper.js">flyer-wrapper.js</a>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Javascript API</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><span class="section-number-3">5.1</span> flyer.broadcast([Options])</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 <i>if you aren't using flyer-wrapper, use flyer.messaging.broadcast instead</i>
 </p>
 </div>
-<div id="outline-container-sec-4-1-1" class="outline-4">
-<h4 id="sec-4-1-1"><span class="section-number-4">4.1.1</span> Options</h4>
-<div class="outline-text-4" id="text-4-1-1">
+<div id="outline-container-sec-5-1-1" class="outline-4">
+<h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> Options</h4>
+<div class="outline-text-4" id="text-5-1-1">
 <dl class="org-dl">
 <dt> channel </dt><dd>the channel you wish to broadcast on. default is "*",
 which stands for <b>all channels</b>
@@ -254,9 +268,9 @@ which stands for <b>all topics</b>
 </div>
 </div>
 
-<div id="outline-container-sec-4-1-2" class="outline-4">
-<h4 id="sec-4-1-2"><span class="section-number-4">4.1.2</span> Examples</h4>
-<div class="outline-text-4" id="text-4-1-2">
+<div id="outline-container-sec-5-1-2" class="outline-4">
+<h4 id="sec-5-1-2"><span class="section-number-4">5.1.2</span> Examples</h4>
+<div class="outline-text-4" id="text-5-1-2">
 <div class="org-src-container">
 
 <pre class="src src-js">flyer.broadcast({
@@ -275,16 +289,16 @@ flyer.broadcast({
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> flyer.subscribe([Options])</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><span class="section-number-3">5.2</span> flyer.subscribe([Options])</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 <i>if you aren't using flyer-wrapper, use flyer.messaging.subscribe instead</i>
 </p>
 </div>
-<div id="outline-container-sec-4-2-1" class="outline-4">
-<h4 id="sec-4-2-1"><span class="section-number-4">4.2.1</span> Options</h4>
-<div class="outline-text-4" id="text-4-2-1">
+<div id="outline-container-sec-5-2-1" class="outline-4">
+<h4 id="sec-5-2-1"><span class="section-number-4">5.2.1</span> Options</h4>
+<div class="outline-text-4" id="text-5-2-1">
 <dl class="org-dl">
 <dt> channel </dt><dd>the channel you wish to subscribe to. default is "*",
 which stands for <b>all channels</b>
@@ -301,9 +315,9 @@ subscription is made.
 </div>
 </div>
 
-<div id="outline-container-sec-4-2-2" class="outline-4">
-<h4 id="sec-4-2-2"><span class="section-number-4">4.2.2</span> Examples</h4>
-<div class="outline-text-4" id="text-4-2-2">
+<div id="outline-container-sec-5-2-2" class="outline-4">
+<h4 id="sec-5-2-2"><span class="section-number-4">5.2.2</span> Examples</h4>
+<div class="outline-text-4" id="text-5-2-2">
 <div class="org-src-container">
 
 <pre class="src src-js">flyer.subscribe({
@@ -323,9 +337,9 @@ subscription is made.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3"><span class="section-number-3">4.3</span> flyer.window.open(url, name, [Options])</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><span class="section-number-3">5.3</span> flyer.window.open(url, name, [Options])</h3>
+<div class="outline-text-3" id="text-5-3">
 <p>
 <i>follows the same API as window.open</i>
 </p>
@@ -336,17 +350,17 @@ subscription is made.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Example</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Example</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 <i>In the works</i>
 </p>
 </div>
 </div>
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Issues</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Issues</h2>
+<div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li>In order to communicate with frames and windows that are within an
 external window, you need to replace <b>window.open</b> with
@@ -371,7 +385,7 @@ page
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Benjamin Zaporzan</p>
-<p class="date">Created: 2014-09-01 Mon 15:51</p>
+<p class="date">Created: 2014-09-01 Mon 16:12</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.3a)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
