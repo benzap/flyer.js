@@ -23,12 +23,12 @@
 <script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     #+END_SRC
 
-    the *flyer-wrapper* file is only necessary if you wish to refer to
+    The *flyer-wrapper* file is only necessary if you wish to refer to
     the API functions from flyer, and not flyer.messaging
 
   - In situations where you would use *window.open*, use
-    *flyer.window.open* instead. The is required in order to track
-    windows references.
+    *flyer.window.open* instead. This is required in order to track
+    window references.
 * Download
 - [[https://github.com/benzap/flyer.js/releases/tag/v0.1.0][Version 0.1.0]]
 
@@ -91,6 +91,14 @@ flyer.subscribe({
 * Example
   /In the works/
 
+* Project Compilation
+  1. Clone this Repository
+  2. Install [[http://leiningen.org/][Leiningen]]
+  3. cd into flyer.js directory
+  4. type *lein deps*
+  5. type *lein cljsbuild once*
+  6. resulting *flyer.js* should now be present in
+     ./resources/public/js/, along with flyer.wrapper.js
 * Issues
   - In order to communicate with frames and windows that are within an
     external window, you need to replace *window.open* with
