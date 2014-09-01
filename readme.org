@@ -1,6 +1,105 @@
-* Introduction
-  flyer.js is a lightweight messaging framework written for
-  clojurescript & javascript to provide broadcast messaging between
-  frames, iframes, and windows.
+* Flyer.js
 
-/In the beginning stages of development/
+  [[./doc/intro.svg]]
+
+  *flyer.js* is a lightweight messaging library written for
+  clojurescript & javascript. 
+
+  It provides broadcast messaging between frames, iframes, and
+  windows.
+
+* Features and Operation
+  - Simple API, from which you can build more elaborate messaging
+    systems.
+  - Messages are broadcasted to all frames and registered windows,
+    regardless of whether or not they want them (hence, the name)
+  - Frames can subscribe to specific channels, and can pattern-match
+    to specific topics being sent on that channel
+* Configuration
+  - Include /flyer.js/ and /flyer-wrapper.js/ at the end of your page
+    body
+    #+BEGIN_SRC js
+<script type="text/javascript" src="./js/flyer.js"></script>
+<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
+    #+END_SRC
+
+    the *flyer-wrapper* file is only necessary if you wish to refer to
+    the API functions from flyer, and not flyer.messaging
+
+  - In situations where you would use *window.open*, use
+    *flyer.window.open* instead. The is required in order to track
+    windows references.
+
+* Javascript API
+** flyer.broadcast([Options])
+/if you aren't using flyer-wrapper, use flyer.messaging.broadcast instead/
+*** Options
+    - channel :: the channel you wish to broadcast on. default is "*",
+                 which stands for *all channels*
+    - topic :: the topic of your broadcast message. default is "*",
+               which stands for *all topics*
+    - data :: any JSON serializable object
+*** Examples
+    #+BEGIN_SRC js
+flyer.broadcast({
+  channel: "default",
+  topic: "person.insert",
+  data: {id: 1, name: "Ben"}
+});
+
+flyer.broadcast({
+  channel: "default",
+  topic: "person.delete",
+  data: {id: 1}
+});
+    #+END_SRC
+
+** flyer.subscribe([Options])
+/if you aren't using flyer-wrapper, use flyer.messaging.subscribe instead/
+*** Options
+    - channel :: the channel you wish to subscribe to. default is "*",
+                 which stands for *all channels*
+    - topic :: the topic you wish to subscribe to. default is "*",
+               which stands for *all channels*. Note that this can
+               also be a string representation of a regex expression.
+    - callback :: callback function of the form *function(data,
+                  [topic],[channel])* that you wish to call when the
+                  subscription is made.
+*** Examples
+    #+BEGIN_SRC js
+flyer.subscribe({
+  channel: "default",
+  topic: "person.*",
+  callback: function(data, topic, channel) {
+    if (topic == "person.insert") {
+      console.log("Inserted Person! - " + data.name);
+    }
+    else if (topic == "person.delete") {
+      console.log("Removed Person with id - " + data.id);
+    }
+  }
+});
+    #+END_SRC
+
+** flyer.window.open(url, name, [Options])
+   /follows the same API as window.open/
+
+   [[https://developer.mozilla.org/en-US/docs/Web/API/Window.open][Mozilla API Page]]
+
+* Example
+  /In the works/
+
+* Issues
+  - In order to communicate with frames and windows that are within an
+    external window, you need to replace *window.open* with
+    *flyer.window.open*
+  - The size of *flyer.js* is quite big, at a whopping 500kb. This is
+    due to the nature of compilation. a flyer.min.js is in the works,
+    which should bring down the size by an order of magnitude.
+  - Refreshing the parent window of an opened window will break any
+    messages from being broadcasted throughout the application. I
+    might include functionality to inform the external window of these
+    actions, so the external window can inform the user of what happened.
+  - external windows can be refreshed without losing communications,
+    however, it requires that flyer.js be included within that html
+    page

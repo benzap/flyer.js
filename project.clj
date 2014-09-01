@@ -10,13 +10,13 @@
   :plugins [[lein-cljsbuild "1.0.3"]]
   :cljsbuild {:builds {:dev
                        {:source-paths ["src-cljs"]
-                        :compiler {:output-to "resources/public/js/flyer-debug.js"
+                        :compiler {:output-to "resources/public/js/flyer.js"
                                    :optimizations :whitespace
                                    :pretty-print true}}
                        :prod
                        {:source-paths ["src-cljs"]
-                        :compiler {:output-to "resources/public/js/flyer.js"
-                                   :optimizations :advanced
+                        :compiler {:output-to "resources/public/js/flyer.min.js"
+                                   :optimizations :simple
                                    :pretty-print false}}}})
 
  
