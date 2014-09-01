@@ -41,6 +41,7 @@ external windows that are opened using the 'open' function"
        nil))
     window))
 
-(defn ^export register-external
+(defn register-external
   ([window] (storage/insert-window-ref! window))
   ([] (register-external js/window)))
+

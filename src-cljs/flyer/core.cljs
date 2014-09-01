@@ -1,28 +1,8 @@
 (ns flyer.core
-  (:use [flyer.messaging
-         :only [broadcast subscribe]]))
+  (:use [flyer.window
+         :only [register-external]]))
 
-#_(defn ^export main []
-  (subscribe 
-   :callback
-   (fn [data]
-     (.log js/console "I am called from parent!"))))
-
-#_(defn ^export child []
-  (subscribe 
-   :topic "general"
-   :callback
-   (fn [data]
-     (.log js/console "I am called from child!")
-     (.log js/console "data: " data)
-     (.log js/console "data: " data)
-     (.log js/console "data: " data))))
-
-#_(if-let [button (.getElementById js/document "main-button")]
-  (do 
-    (.log js/console "button found!")
-    (.addEventListener 
-     button "click"
-     (fn [event]
-       (broadcast :topic "general")
-       (.log js/console "Button Pressed!")))))
+;;if the window is external, we should re-register it for cases where
+;;the window gets refreshed
+(when (not (nil? (.-opener js/window)))
+  (register-external))
