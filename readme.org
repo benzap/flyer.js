@@ -24,7 +24,7 @@
     #+END_SRC
 
     The *flyer-wrapper* file is only necessary if you wish to refer to
-    the API functions from flyer, and not flyer.messaging
+    the API functions from flyer, and not flyer.wrapper
 
   - In situations where you would use *window.open*, use
     *flyer.window.open* instead. This is required in order to track
@@ -34,7 +34,7 @@
 
 * Javascript API
 ** flyer.broadcast([Options])
-/if you aren't using flyer-wrapper, use flyer.messaging.broadcast instead/
+/if you aren't using flyer-wrapper, use flyer.wrapper.broadcast instead/
 *** Options
     - channel :: the channel you wish to broadcast on. default is "*",
                  which stands for *all channels*
@@ -57,7 +57,7 @@ flyer.broadcast({
     #+END_SRC
 
 ** flyer.subscribe([Options])
-/if you aren't using flyer-wrapper, use flyer.messaging.subscribe instead/
+/if you aren't using flyer-wrapper, use flyer.wrapper.subscribe instead/
 *** Options
     - channel :: the channel you wish to subscribe to. default is "*",
                  which stands for *all channels*
