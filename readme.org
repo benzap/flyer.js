@@ -62,7 +62,7 @@ flyer.broadcast({
     - channel :: the channel you wish to subscribe to. default is "*",
                  which stands for *all channels*
     - topic :: the topic you wish to subscribe to. default is "*",
-               which stands for *all channels*. Note that this can
+               which stands for *all topics*. Note that this can
                also be a string representation of a regex expression.
     - callback :: callback function of the form *function(data,
                   [topic],[channel])* that you wish to call when the
@@ -87,6 +87,58 @@ flyer.subscribe({
    /follows the same API as window.open/
 
    [[https://developer.mozilla.org/en-US/docs/Web/API/Window.open][Mozilla API Page]]
+
+* Clojurescript API *untested*
+** flyer.messaging/broadcast
+*** (broadcast & options)
+*** Options
+    - channel :: the channel you wish to broadcast on. default is "*",
+                 which stands for *all channels*
+    - topic :: the topic of your broadcast message. default is "*",
+               which stands for *all topics*
+    - data :: any JSON serializable object
+*** Example
+    #+BEGIN_SRC clojurescript
+(broadcast :channel "default"
+           :topic "person.insert"
+           :data {id: 1 :name "Ben"})
+    #+END_SRC
+** flyer.messaging/subscribe
+*** (subscribe & options)
+*** Options
+    - channel :: the channel you wish to subscribe to. default is "*",
+                 which stands for *all channels*
+    - topic :: the topic you wish to subscribe to. default is "*",
+               which stands for *all topics*. Note that this can
+               also be a string representation of a regex expression.
+    - callback :: callback function of the form *function(data,
+                  [topic],[channel])* that you wish to call when the
+                  subscription is made.
+		  
+*** Example
+    #+BEGIN_SRC clojurescript
+(subscribe :channel "default"
+           :topic "person.*"
+           :callback
+           (fn [data topic channel]
+               (condp (= topic)
+                      "person.insert"
+                      (.log js/console "Inserting person! - " (.-name data))
+                      "person.delete"
+                      (.log js/console "Deleting person! - #" (.-id data)))))
+    #+END_SRC
+** flyer.window/open
+*** (open url name & options)
+*** url parameter
+    The window URL
+*** name parameter
+    The unique name you wish to give the window
+*** Options
+    key / value pairs of options equivalent to window.open options
+*** Example
+    #+BEGIN_SRC clojurescript
+(open "frame_login.html" "login-page" :width 400 :height 600)
+    #+END_SRC
 
 * Example
   /In the works/
