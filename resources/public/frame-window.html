@@ -39,7 +39,7 @@
 	 
      flyer.subscribe({
 	   callback: function(data, topic, channel) {
-		 console.log("called from window!");
+		 console.log("called from " + window.name + "!");
 		 console.log("data: ", data);
 		 console.log("topic: ", topic);
 		 console.log("channel: ", channel);

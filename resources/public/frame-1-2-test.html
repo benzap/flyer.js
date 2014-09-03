@@ -33,9 +33,10 @@
 	   });
 	 
      flyer.subscribe({
-	   callback: function(data, topic, channel) {
-		 console.log("called from child!");
-	   },
+		 topic: "general.button",
+		 callback: function(data, topic, channel) {
+			 console.log("called from child!");
+		 },
      });
     </script>
   </body>
