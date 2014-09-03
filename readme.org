@@ -121,7 +121,7 @@ flyer.subscribe({
            :topic "person.*"
            :callback
            (fn [data topic channel]
-               (condp (= topic)
+               (condp = topic
                       "person.insert"
                       (.log js/console "Inserting person! - " (.-name data))
                       "person.delete"

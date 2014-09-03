@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>readme</title>
-<!-- 2014-09-02 Tue 20:29 -->
+<!-- 2014-09-02 Tue 20:32 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Benjamin Zaporzan" />
@@ -447,7 +447,7 @@ subscription is made.
            <span style="color: #DEC77B;">:topic</span> <span style="color: #8CBED6;">"person.*"</span>
            <span style="color: #DEC77B;">:callback</span>
            (<span style="color: #DEC77B;">fn</span> [data topic channel]
-               (<span style="color: #DEC77B;">condp</span> (<span style="color: #DEC77B;">=</span> topic)
+               (<span style="color: #DEC77B;">condp</span> = topic
                       <span style="color: #8CBED6;">"person.insert"</span>
                       (<span style="color: #EC9A41;">.log</span> js/console <span style="color: #8CBED6;">"Inserting person! - "</span> (<span style="color: #EC9A41;">.-name</span> data))
                       <span style="color: #8CBED6;">"person.delete"</span>
@@ -559,7 +559,7 @@ page
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Benjamin Zaporzan</p>
-<p class="date">Created: 2014-09-02 Tue 20:29</p>
+<p class="date">Created: 2014-09-02 Tue 20:32</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.3a)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
