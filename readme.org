@@ -88,7 +88,7 @@ flyer.subscribe({
 
    [[https://developer.mozilla.org/en-US/docs/Web/API/Window.open][Mozilla API Page]]
 
-* Clojurescript API *untested*
+* Clojurescript API (untested)
 ** flyer.messaging/broadcast
 *** (broadcast & options)
 *** Options
@@ -101,7 +101,7 @@ flyer.subscribe({
     #+BEGIN_SRC clojurescript
 (broadcast :channel "default"
            :topic "person.insert"
-           :data {id: 1 :name "Ben"})
+           :data {:id 1 :name "Ben"})
     #+END_SRC
 ** flyer.messaging/subscribe
 *** (subscribe & options)
@@ -111,8 +111,8 @@ flyer.subscribe({
     - topic :: the topic you wish to subscribe to. default is "*",
                which stands for *all topics*. Note that this can
                also be a string representation of a regex expression.
-    - callback :: callback function of the form *function(data,
-                  [topic],[channel])* that you wish to call when the
+    - callback :: callback function of the form *(fn [data] [topic]
+                  [channel] ...)* that you wish to call when the
                   subscription is made.
 		  
 *** Example

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>readme</title>
-<!-- 2014-09-02 Tue 20:21 -->
+<!-- 2014-09-02 Tue 20:23 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Benjamin Zaporzan" />
@@ -161,7 +161,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-5-3">5.3. flyer.window.open(url, name, [Options])</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">6. Clojurescript API <b>untested</b></a>
+<li><a href="#sec-6">6. Clojurescript API (untested)</a>
 <ul>
 <li><a href="#sec-6-1">6.1. flyer.messaging/broadcast</a>
 <ul>
@@ -376,7 +376,7 @@ subscription is made.
 </div>
 </div>
 <div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Clojurescript API <b>untested</b></h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> Clojurescript API (untested)</h2>
 <div class="outline-text-2" id="text-6">
 </div><div id="outline-container-sec-6-1" class="outline-3">
 <h3 id="sec-6-1"><span class="section-number-3">6.1</span> flyer.messaging/broadcast</h3>
@@ -407,7 +407,7 @@ which stands for <b>all topics</b>
 
 <pre class="src src-clojurescript">(broadcast <span style="color: #DEC77B;">:channel</span> <span style="color: #8CBED6;">"default"</span>
            <span style="color: #DEC77B;">:topic</span> <span style="color: #8CBED6;">"person.insert"</span>
-           <span style="color: #DEC77B;">:data</span> {id: 1 <span style="color: #DEC77B;">:name</span> <span style="color: #8CBED6;">"Ben"</span>})
+           <span style="color: #DEC77B;">:data</span> {<span style="color: #DEC77B;">:id</span> 1 <span style="color: #DEC77B;">:name</span> <span style="color: #8CBED6;">"Ben"</span>})
 </pre>
 </div>
 </div>
@@ -431,8 +431,8 @@ which stands for <b>all channels</b>
 which stands for <b>all topics</b>. Note that this can
 also be a string representation of a regex expression.
 </dd>
-<dt> callback </dt><dd>callback function of the form <b>function(data,
-[topic],[channel])</b> that you wish to call when the
+<dt> callback </dt><dd>callback function of the form <b>(fn [data] [topic]
+[channel] &#x2026;)</b> that you wish to call when the
 subscription is made.
 </dd>
 </dl>
@@ -559,7 +559,7 @@ page
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Benjamin Zaporzan</p>
-<p class="date">Created: 2014-09-02 Tue 20:21</p>
+<p class="date">Created: 2014-09-02 Tue 20:23</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.3a)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
