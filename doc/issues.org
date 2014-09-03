@@ -1,0 +1,9 @@
+- [ ] IE can't guarantee that addEventListener will work, switch to
+  using goog.event for a polyfill
+- [ ] grabbing from the 'message' event needs to be validated
+  better. Should cancel trying to grab the message if it can't be
+  parsed.
+- [ ] get flyer.min.js documentation, and get a working example
+- [ ] create a good demo
+- [ ] ensure that everything works down to IE9+
+- [ ] window-list-key needs checks for when it's undefined
