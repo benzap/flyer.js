@@ -10,4 +10,5 @@ pom.xml.asc
 .lein-plugins/
 .lein-failures
 resources/public/js/flyer.js
+resources/public/js/flyer.min.js
 resources/public/js/flyer-wrapper.js
