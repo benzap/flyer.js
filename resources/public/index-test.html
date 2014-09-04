@@ -40,6 +40,7 @@
 	   "click",
 	   function(event) {
 		 flyer.broadcast({
+		   target: "local",
 		   topic: "general.button",
 		   data: {buttonId: "main-button",
 				  frame: "main"},
@@ -59,21 +60,24 @@
 	 
      flyer.subscribe({
 	   topic: "general.*",
-	   callback: function(data, topic, channel) {
+	   origin: "local",
+	   callback: function(data, topic, channel, origin) {
 		 console.log("called from main");
 		 console.log("data: ", data);
 		 console.log("topic: ", topic);
 		 console.log("channel: ", channel);
+		 console.log("origin: ", origin);
 	   }
      });
 
      flyer.subscribe({
 	   channel: "FOREIGN",
-	   callback: function(data, topic, channel) {
+	   callback: function(data, topic, channel, origin) {
 		 console.log("this is a foreign post message");
 		 console.log("data: ", data);
 		 console.log("topic: ", topic);
 		 console.log("channel: ", channel);
+		 console.log("origin: ", origin);
 	   }
      });
 	 
