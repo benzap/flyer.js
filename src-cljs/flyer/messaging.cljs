@@ -88,12 +88,16 @@ and the topic"
   (let [callback-wrapper
         (fn [event]
           (let [data (.-data (.getBrowserEvent event))
-                msg-js (.parse js/JSON data)
+                msg-js (try (.parse js/JSON data)
+                            (catch js/Error e
+                              #js {:channel "FOREIGN"
+                                   :topic (default-message :topic)
+                                   :data data}))
                 msg (js->clj msg-js)
                 ;;extract data from channel
-                msg-data (.-data msg-js)
-                msg-topic (.-topic msg-js)
-                msg-channel (.-channel msg-js)]
+                msg-channel (or (.-channel msg-js) "FOREIGN")
+                msg-topic (or (.-topic msg-js) (default-message :topic))
+                msg-data (or (.-data msg-js) (default-message :data))]
             (when (like-this-flyer? msg-topic msg-channel
                                     topic channel)
               (callback msg-data msg-topic msg-channel))))]

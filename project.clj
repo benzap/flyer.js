@@ -1,4 +1,4 @@
-(defproject flyer "0.1.0"
+(defproject flyer "0.1.2"
   :description "Clojurescript + Javascript Broadcast Messaging between
   iFrames, Framesets, and Windows"
   :url "https://github.com/benzap/flyer.js"

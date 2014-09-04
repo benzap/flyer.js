@@ -59,13 +59,24 @@
 	 
      flyer.subscribe({
 	   topic: "general.*",
-       callback: function(data, topic, channel) {
+	   callback: function(data, topic, channel) {
 		 console.log("called from main");
 		 console.log("data: ", data);
 		 console.log("topic: ", topic);
 		 console.log("channel: ", channel);
 	   }
      });
+
+     flyer.subscribe({
+	   channel: "FOREIGN",
+	   callback: function(data, topic, channel) {
+		 console.log("this is a foreign post message");
+		 console.log("data: ", data);
+		 console.log("topic: ", topic);
+		 console.log("channel: ", channel);
+	   }
+     });
+	 
      
     </script>
   </body>
