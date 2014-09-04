@@ -1,5 +1,6 @@
 (ns flyer.messaging
-  (:require [flyer.traversal :as traversal]))
+  (:require [flyer.traversal :as traversal]
+            [goog.events :as events]))
 
 (def default-message 
   "default message structure"
@@ -43,7 +44,9 @@
   "used to subscribe to the broadcast messages this takes advantage of
   message postback"
   ([window callback]
-     (.addEventListener window "message" callback true))
+     (events/listen
+      window (.-MESSAGE events/EventType) callback)
+     #_(.addEventListener window "message" callback true))
   ([callback] (create-broadcast-listener default-window callback)))
 
 (defn like-this-channel? 
@@ -85,7 +88,8 @@ and the topic"
       :as sub}]
   (let [callback-wrapper
         (fn [event]
-          (let [data (.-data event)
+          (let [data (.-data (.getBrowserEvent event))
+                _ (.log js/console data)
                 msg-js (.parse js/JSON data)
                 msg (js->clj msg-js)
                 ;;extract data from channel

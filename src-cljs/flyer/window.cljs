@@ -1,6 +1,7 @@
 (ns flyer.window
   (:require [flyer.storage :as storage]
-            [flyer.utils :as utils]))
+            [flyer.utils :as utils]
+            [goog.events :as events]))
 
 (def this-window js/window)
 
@@ -34,10 +35,11 @@ external windows that are opened using the 'open' function"
                      (apply gen-window-options options))
         window (.open this-window url name options-str)]
     (storage/insert-window-ref! window)
-    (.addEventListener
-     window "beforeunload"
+    (events/listen
+     window (.-BEFOREUNLOAD events/EventType)
      (fn [event]
        (storage/remove-window-ref! window)
+       (.log js/console "test")
        nil))
     window))
 
