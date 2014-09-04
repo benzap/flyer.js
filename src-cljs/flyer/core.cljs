@@ -1,10 +1,8 @@
 (ns flyer.core
   (:use [flyer.window
-         :only [register-external
-                open]])
+         :only [register-external]])
   (:require [flyer.storage :as s]
-            [flyer.utils :as utils]
-            [flyer.wrapper]))
+            [flyer.utils :as utils]))
 
 ;;if i'm the parent window, intiialize ref variable
 (when (= (utils/get-main-parent) js/window)

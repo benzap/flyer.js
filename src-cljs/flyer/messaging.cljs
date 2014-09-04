@@ -36,7 +36,6 @@
            topic (:topic default-message)}}]
   (let [msg {:data data :channel channel :topic topic}
         msg-js (clj->js msg)
-        _ (.log js/console msg-js)
         broadcast-list (traversal/generate-broadcast-list)]
     (doseq [window broadcast-list] 
          (window-post-message window msg))))
