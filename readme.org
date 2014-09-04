@@ -149,7 +149,7 @@ flyer.subscribe({
   4. type *lein deps*
   5. type *lein cljsbuild once*
   6. resulting *flyer.js* should now be present in
-     ./resources/public/js/, along with flyer.wrapper.js
+     ./resources/public/js/, along with flyer-wrapper.js
 * Issues
   - In order to communicate with frames and windows that are within an
     external window, you need to replace *window.open* with
