@@ -39,7 +39,6 @@ external windows that are opened using the 'open' function"
      window (.-BEFOREUNLOAD events/EventType)
      (fn [event]
        (storage/remove-window-ref! window)
-       (.log js/console "test")
        nil))
     window))
 

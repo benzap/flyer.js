@@ -45,8 +45,7 @@
   message postback"
   ([window callback]
      (events/listen
-      window (.-MESSAGE events/EventType) callback)
-     #_(.addEventListener window "message" callback true))
+      window (.-MESSAGE events/EventType) callback))
   ([callback] (create-broadcast-listener default-window callback)))
 
 (defn like-this-channel? 
@@ -89,7 +88,6 @@ and the topic"
   (let [callback-wrapper
         (fn [event]
           (let [data (.-data (.getBrowserEvent event))
-                _ (.log js/console data)
                 msg-js (.parse js/JSON data)
                 msg (js->clj msg-js)
                 ;;extract data from channel
