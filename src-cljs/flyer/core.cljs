@@ -1,8 +1,10 @@
 (ns flyer.core
   (:use [flyer.window
-         :only [register-external]])
+         :only [register-external
+                open]])
   (:require [flyer.storage :as s]
-            [flyer.utils :as utils]))
+            [flyer.utils :as utils]
+            [flyer.wrapper]))
 
 ;;if i'm the parent window, intiialize ref variable
 (when (= (utils/get-main-parent) js/window)
@@ -12,5 +14,3 @@
 ;;the window gets refreshed
 (when (not (nil? (.-opener js/window)))
   (register-external))
-
-

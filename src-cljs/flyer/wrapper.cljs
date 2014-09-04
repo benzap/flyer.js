@@ -8,12 +8,12 @@
         obj-vec (reduce concat (vec obj))]
     (apply f obj-vec)))
 
-(defn ^export broadcast
+(defn ^:export broadcast
   "Wrapper around broadcast for javascript"
   [obj]
   (apply-js-obj msg/broadcast obj))
 
-(defn ^export subscribe
+(defn ^:export subscribe
   "Wrapper around subscribe for javascript"
   [obj]
   (apply-js-obj msg/subscribe obj))
