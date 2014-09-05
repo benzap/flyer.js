@@ -16,7 +16,7 @@
                        :prod
                        {:source-paths ["src-cljs"]
                         :compiler {:output-to "resources/public/js/flyer.min.js"
-                                   :optimizations :simple
+                                   :optimizations :advanced
                                    :pretty-print false}}}})
 
  

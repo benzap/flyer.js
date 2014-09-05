@@ -28,8 +28,7 @@
         target-origin (condp = (keyword target)
                         :local (.-origin (.-location window))
                         :all "*"
-                        target)
-        _ (.log js/console target-origin)]
+                        target)]
     ;;TODO: this should include a good origin
     (.postMessage window data-json target-origin)))
   ([window msg] (window-post-message window msg "*")))
