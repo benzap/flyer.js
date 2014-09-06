@@ -1,4 +1,4 @@
-(defproject flyer "0.1.2"
+(defproject flyer "1.0.1"
   :description "Clojurescript + Javascript Broadcast Messaging between
   iFrames, Framesets, and Windows"
   :url "https://github.com/benzap/flyer.js"
@@ -11,6 +11,7 @@
   :cljsbuild {:builds {:dev
                        {:source-paths ["src-cljs"]
                         :compiler {:output-to "resources/public/js/flyer.js"
+                                   :jar true
                                    :optimizations :whitespace
                                    :pretty-print true}}
                        :prod
