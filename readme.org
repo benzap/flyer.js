@@ -18,7 +18,7 @@
 * Javascript Configuration
   - Include /flyer.js/ and /flyer-wrapper.js/ at the end of your page
     body
-    #+BEGIN_SRC js
+    #+BEGIN_SRC html
 <script type="text/javascript" src="./js/flyer.js"></script>
 <script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     #+END_SRC
