@@ -10,6 +10,10 @@
 (defn get-window-refs []
   (aget storage window-list-key))
   
+(defn has-window-ref? [window]
+  (let [winref (get-window-refs)]
+    (some #{window} winref)))
+
 (defn insert-window-ref! [window]
   (aset storage window-list-key
         (conj (get-window-refs) window)))

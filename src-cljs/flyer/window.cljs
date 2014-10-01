@@ -34,7 +34,10 @@ external windows that are opened using the 'open' function"
                      :else
                      (apply gen-window-options options))
         window (.open this-window url name options-str)]
-    (storage/insert-window-ref! window)
+    ;;only add the window to our window references if it didn't exist previously
+    ;;fixes issue with IE when trying to re-open a window
+    (when (not (storage/has-window-ref? window))
+      (storage/insert-window-ref! window))
     (events/listen
      window (.-BEFOREUNLOAD events/EventType)
      (fn [event]
