@@ -8,6 +8,8 @@
   It provides broadcast messaging between frames, iframes, and
   windows.
 
+  Here is a [[http://benzap.github.com/flyer.js][demo page]], which is in the works.
+
 * Features and Operation
   - Simple API, from which you can build more elaborate messaging
     systems.
@@ -47,7 +49,6 @@
 *** Examples
     #+BEGIN_SRC js
 flyer.broadcast({
-  target: "local",
   channel: "default",
   topic: "person.insert",
   data: {id: 1, name: "Ben"}
@@ -72,8 +73,8 @@ flyer.broadcast({
                   [topic],[channel])* that you wish to call when the
                   subscription is made.
     - origin :: refers to the origin, or domain from which the
-                messages will be received. The default is *'all'*, but
-                it can be set to *'local'*, or to another origin
+                messages will be received. The default is *all*, but
+                it can be set to *local*, or to another origin
 *** Examples
     #+BEGIN_SRC js
 flyer.subscribe({
@@ -156,7 +157,7 @@ flyer.subscribe({
     #+END_SRC
 
 * Example
-  /In the works/
+  [[http://benzap.github.io/flyer.js][Demo Page]]
 
 * Project Compilation
   1. Clone this Repository
@@ -180,3 +181,4 @@ flyer.subscribe({
   - external windows can be refreshed without losing communications,
     however, it requires that flyer.js be included within that html
     page
+
