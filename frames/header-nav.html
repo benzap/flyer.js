@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/main.css" />
+		
+		<style>
+		 .fill-container {
+			 position: absolute;
+			 top: 0;
+			 right: 0;
+			 bottom: 0;
+			 left:0;
+			 background-color: #F18D05;
+			 overflow: hidden;
+		 }
+
+		 .header-status {
+			 float:right;
+			 height: 100%;
+			 margin: 10px;
+			 padding: 10px;
+			 overflow: hidden;
+		 }
+		 
+		</style>
+	</head>
+	<body>
+		<div class="fill-container">
+			<button id="nav-home" class="button nav">Home</button>
+			<button id="nav-external" class="button nav">External Windows</button>
+			<div id="header-status" class="header-status">Nothing Clicked</div>
+		</div>
+		<script src="/flyer.js"></script>
+		<script src="/flyer-wrapper.js"></script>
+		<script src="/flyer-helper.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript">
+		 
+		 $("#nav-home").click(function() {
+			 broadcast_click("home");
+		 });
+		 $("#nav-external").click(function() {
+			 broadcast_click("external");
+		 });
+
+		 flyer.subscribe({
+			 channel: "demo",
+			 topic: "button.*.clicked",
+			 callback: function(data) {
+				 var buttonClicked = data.clickName || "unkonwn";
+				 $("#header-status").text(buttonClicked + " was clicked!");
+			 }
+		 });
+							   
+		</script>
+	</body>
+</html>

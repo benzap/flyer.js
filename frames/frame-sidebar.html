@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/main.css" />
+		
+		<style>
+		 .fill-container {
+			 position: absolute;
+			 top: 0;
+			 right: 0;
+			 bottom: 0;
+			 left:0;
+			 background-color: #00A1CB
+		 }
+		 
+		</style>
+	</head>
+	<body>
+		<div id="sidebar" class="fill-container">
+		</div>
+		<script src="/flyer.js"></script>
+		<script src="/flyer-wrapper.js"></script>
+		<script src="/flyer-helper.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript">
+		 var button_id = 0
+		 function add_sidebar_button(name) {
+			 domButton = $("<button>")
+			 domButton.addClass("button");
+			 domButton.addClass("sidebar");
+			 domButton.attr("id", "sidebutton-" + button_id);
+			 domButton.attr("name", name);
+			 domButton.text(name);
+			 button_id+=1;
+			 $("#sidebar").append(domButton);
+			 domButton.click(function() {
+				 flyer.broadcast({
+					 channel: "demo",
+					 topic: "button.sidebar.clicked",
+					 data: {clickName: name},
+				 });
+			 });
+		 }
+
+		 add_sidebar_button("test");
+		 
+		</script>
+	</body>
+</html>

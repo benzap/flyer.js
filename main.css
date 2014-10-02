@@ -1,0 +1,59 @@
+/* http://www.colourlovers.com/business/trends/branding/7880/Papeterie_Haute-Ville_Logo */
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Droid Sans', sans-serif;
+}
+
+.button {
+    background-color: #D70060;
+    outline: none;
+    height: 30px;
+    width: 100px;
+    border: 1px solid #e81179;
+    color: #fdfdfd;
+    border-radius: 4px;
+}
+
+.button:active {
+    color: black;
+}
+
+.button:hover {
+    background-color: #F92282;
+    cursor: pointer;
+}
+
+.button.nav {
+    border-radius: 0;
+    font-size: 20px;
+    height: 60px;
+    width: 200px;
+}
+
+.button.sidebar {
+    background-color: #113F8C;
+    border: 1px solid #002E7B;
+    font-size: 24px;
+    border-radius: 0;
+    width: 300px;
+    height: 80px;
+}
+
+.frame-fill {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #fafafa;
+}
+	    
+.fill {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
