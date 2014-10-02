@@ -7,18 +7,21 @@
 
 (def window-list-key "flyer_WindowReferences")
 
-(defn init-window-refs []
-  (when (nil? (get-window-refs))
+(defn init-window-refs 
+  "Initializes our window references"
+  []
+  (when (empty? (get-window-refs))
     (aset storage window-list-key #{})))
 
-(defn get-window-refs []
-  (aget storage window-list-key))
-  
-(defn has-window-ref? [window]
-  (let [winref (or (get-window-refs) #{})]
-    (some #{window} winref)))
+(defn get-window-refs 
+  "Returns the window references, or an empty set"
+  []
+  (or
+   (aget storage window-list-key)
+   #{}))
 
 (defn insert-window-ref! [window]
+  (init-window-refs)
   (aset storage window-list-key
         (conj (get-window-refs) window)))
 
