@@ -32,7 +32,7 @@
     *flyer.window.open* instead. This is required in order to track
     window references.
 * Download
-- [[https://github.com/benzap/flyer.js/releases/tag/v1.0.2][Version 1.0.2]]
+  - [[https://github.com/benzap/flyer.js/releases/tag/v1.0.3][Version 1.0.3]]
 * Javascript API
 ** flyer.broadcast([Options])
 /if you aren't using flyer-wrapper, use flyer.wrapper.broadcast instead/
