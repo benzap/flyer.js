@@ -4,9 +4,9 @@
   (:require [flyer.storage :as s]
             [flyer.utils :as utils]))
 
-;;if i'm the parent window, intiialize ref variable
-(when (= (utils/get-main-parent) js/window)
-  (aset s/storage s/window-list-key #{}))
+;;always try and initialize window refs.
+;;this way, we don't even need flyer.js in the parent window
+(s/init-window-refs)
 
 ;;if the window is external, we should re-register it for cases where
 ;;the window gets refreshed
