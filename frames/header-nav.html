@@ -42,12 +42,12 @@
 		 $("#nav-external").click(function() {
 			 broadcast_click("external");
 		 });
-
+		 
 		 flyer.subscribe({
 			 channel: "demo",
 			 topic: "button.*.clicked",
 			 callback: function(data) {
-				 var buttonClicked = data.clickName || "unkonwn";
+				 var buttonClicked = data.clickName || "unknown";
 				 $("#header-status").text(buttonClicked + " was clicked!");
 			 }
 		 });

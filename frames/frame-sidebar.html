@@ -43,6 +43,16 @@
 		 }
 
 		 add_sidebar_button("test");
+
+		 flyer.subscribe({
+			 channel: "demo",
+			 topic: "button.*.add",
+			 callback: function(data) {
+				 var buttonName = data.buttonName;
+				 add_sidebar_button(buttonName);
+			 }
+		 });
+
 		 
 		</script>
 	</body>

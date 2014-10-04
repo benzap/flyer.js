@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Droid Sans', sans-serif;
+    box-sizing: border-box;
 }
 
 .button {
@@ -16,6 +17,30 @@
     border: 1px solid #e81179;
     color: #fdfdfd;
     border-radius: 4px;
+    padding: 5px;
+    margin: 5px;
+    
+}
+
+.input-text {
+    background-color: #ddd;
+    outline: none;
+    height: 30px;
+    width: 150px;
+    border: 1px solid #e81179;
+    color: #32742C;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px;
+    
+}
+
+.button-medium {
+    width: 150px;
+}
+
+.button-large {
+    width: 200px;
 }
 
 .button:active {
@@ -32,6 +57,7 @@
     font-size: 20px;
     height: 60px;
     width: 200px;
+    margin: 0;
 }
 
 .button.sidebar {
@@ -41,6 +67,8 @@
     border-radius: 0;
     width: 300px;
     height: 80px;
+    margin: 0;
+    
 }
 
 .frame-fill {
@@ -48,6 +76,7 @@
     width: 100%;
     height: 100%;
     background-color: #fafafa;
+    border: none;
 }
 	    
 .fill {
@@ -56,4 +85,5 @@
     right: 0;
     bottom: 0;
     left: 0;
+    border: none;
 }

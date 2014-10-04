@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/main.css" />
+		
+		<style>
+		 .fill-container {
+			 position: absolute;
+			 border: none;
+			 top: 0;
+			 right: 0;
+			 bottom: 0;
+			 left:0;
+			 background-color: #616161;
+		 }
+
+		 .main-tree {
+			 margin: 5px;
+			 text-align: center;
+			 padding: 5px;
+		 }
+
+		 .button-content {
+			 width: 200px;
+		 }
+
+		 #messages {
+			 margin: auto auto; 
+			 text-align: left;
+			 width: 240px;
+			 height: 150px;
+			 overflow: auto;
+			 background-color: #fdfdfd;
+		 }
+
+		 .message {
+			 padding: 3px;
+			 margin-top: 3px;
+			 margin-right: 3px;
+		 }
+		 
+		 #tree-name {
+			 background-color: #333;
+			 color: #D0D102;
+		 }
+		 
+		</style>
+	</head>
+	<body>
+		<div class="fill-container">
+			<div class="tree main-tree">
+
+				<div id="messages">
+					<div id="tree-name"></div>
+					<ul></ul>
+				</div>
+				
+				<button id="button-open-external" class="button button-large">Open External</button>
+				<br />
+				<input type="input" id="input-text" class="input-text" placeholder="button name"></button>
+				<button id="button-add-button" class="button button-medium">Add Button</button>
+				<br />
+				<button id="button-send-message" class="button button-large success">Send Message</button>
+			</div>
+		</div>
+		<script src="/flyer.js"></script>
+		<script src="/flyer-wrapper.js"></script>
+		<script src="/flyer-helper.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript">
+		 $.urlParam = function(name){
+			 var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+			 return results && results[1] || null;
+		 }
+		 //unique_name i'm using for this window
+		 var tree_leaf = $.urlParam("tree") || "tree";
+		 $("#tree-name").text(tree_leaf);
+		 
+		 $("#button-open-external").click(function() {
+			 var tree_name = tree_leaf + "-e";
+			 var ext = flyer.window.open("frame-tree.html?tree=" + tree_name, tree_leaf, "width=600,height=600");
+		 });
+
+		 $("#button-send-message").click(function() {
+			 flyer.broadcast({
+				 channel: "demo",
+				 topic: "button.tree.clicked",
+				 data: {
+					 clickName: tree_leaf,
+					 tree_leaf: tree_leaf,
+				 },
+			 });
+		 });
+
+		 $("#button-add-button").click(function() {
+			 var text = $("#input-text").val() || "button name";
+			 flyer.broadcast({
+				 channel: "demo",
+				 topic: "button.button.add",
+				 data: {
+					 buttonName: text,
+				 },
+			 });
+		 });
+		 
+		 $("#button-split-horizontally").click(function() {
+			 flyer.broadcast({
+				 channel: "demo",
+				 topic: "button.tree.horizontal.clicked",
+				 data: {
+					 clickName: tree_leaf + "-horizontal",
+					 tree_leaf: tree_leaf,
+				 }
+			 });
+		 });
+
+		 $("#button-split-vertically").click(function() {
+			 flyer.broadcast({
+				 channel: "demo",
+				 topic: "button.tree.vertical.clicked",
+				 data: {
+					 clickName: tree_leaf + "-vertical",
+					 tree_leaf: tree_leaf,
+				 }
+			 });
+		 });
+		 
+		 flyer.subscribe({
+			 channel: "demo",
+			 topic: "button.*.clicked",
+			 callback: function(data) {
+				 var text = data.clickName || data.tree_leaf || "unknown";
+				 text += " clicked!";
+				 var treemsg = $("<li class='message'></li>").text(text);
+				 $("#messages ul").append(treemsg);
+			 }
+		 });
+		 
+		 
+		</script>
+	</body>
+</html>
