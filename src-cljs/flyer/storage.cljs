@@ -11,15 +11,15 @@
 (defn init-window-refs 
   "Initializes our window references"
   []
-  (when (empty? (get-window-refs))
-    (aset storage window-list-key #{})))
+  (when (nil? (get-window-refs))
+    (aset storage window-list-key (set nil))))
 
 (defn get-window-refs 
   "Returns the window references, or an empty set"
   []
   (or
    (aget storage window-list-key)
-   #{}))
+   nil))
 
 (defn insert-window-ref! [window]
   (init-window-refs)
@@ -29,3 +29,4 @@
 (defn remove-window-ref! [window]
   (aset storage window-list-key
         (disj (get-window-refs) window)))
+

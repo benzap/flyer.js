@@ -26,7 +26,7 @@ external windows that are opened using the 'open' function"
       (apply str (interpose ", " options-inter)))
     (.error js/console "options needs an even number of terms")))
 
-(defn ^export open [url name & options]
+(defn ^:export open [url name & options]
   (let [options-str (cond
                      (and (= (count options) 1)
                           (= (type (first options)) js/String))

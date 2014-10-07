@@ -32,7 +32,7 @@
 	<iframe name="frame-1" src="./frame1-test.html" style=""></iframe>
 	<iframe name="frame-2" src="./frame2-test.html" style="right:0;"></iframe>
 
-	<script type="text/javascript" src="./js/flyer.js"></script>
+	<script type="text/javascript" src="./js/flyer.min.js"></script>
 	<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     <script type="text/javascript">
 	 var button = document.getElementById("main-button");
@@ -71,7 +71,7 @@
      });
 
      flyer.subscribe({
-	   channel: "FOREIGN",
+	   channel: "*",
 	   callback: function(data, topic, channel, origin) {
 		 console.log("this is a foreign post message");
 		 console.log("data: ", data);

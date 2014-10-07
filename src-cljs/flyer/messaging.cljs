@@ -20,7 +20,7 @@
   (.log js/console "callback-topic:" topic)
   (.log js/console "callback-channel:" channel))
 
-(defn window-post-message
+(defn ^:export window-post-message
   "performs the window postback"
   ([window msg target]
   (let [data-js (clj->js msg)
@@ -29,24 +29,24 @@
                         :local (.-origin (.-location window))
                         :all "*"
                         target)]
-    ;;TODO: this should include a good origin
     (.postMessage window data-json target-origin)))
   ([window msg] (window-post-message window msg "*")))
 
-(defn broadcast
+(defn ^:export broadcast
   "broadcast message to currently active frames"
   [& {:keys [data channel topic target]
       :or {data (:data default-message)
            channel (:channel default-message)
            topic (:topic default-message)
-           target :all}}]
-  (let [msg {:data data :channel channel :topic topic :target target}
+           target :all}
+      :as param}]
+  (let [msg {:data data :channel channel :topic topic}
         msg-js (clj->js msg)
         broadcast-list (traversal/generate-broadcast-list)]
     (doseq [window broadcast-list] 
          (window-post-message window msg target))))
 
-(defn create-broadcast-listener
+(defn ^:export create-broadcast-listener
   "used to subscribe to the broadcast messages this takes advantage of
   message postback"
   ([window callback]
@@ -54,13 +54,13 @@
       window (.-MESSAGE events/EventType) callback))
   ([callback] (create-broadcast-listener default-window callback)))
 
-(defn like-this-channel? 
+(defn ^:export like-this-channel? 
   [msg-channel callback-channel]
   (some true? 
         [(= callback-channel (default-message :channel))
          (= msg-channel callback-channel)]))
 
-(defn like-this-topic?
+(defn ^:export like-this-topic?
   [msg-topic callback-topic]
   (some true?
         [(= callback-topic (default-message :topic))
@@ -74,7 +74,7 @@
              ;;TODO: include warning when in debug mode
              nil))]))
 
-(defn like-this-origin?
+(defn ^:export like-this-origin?
   [msg-origin callback-origin]
   (some true?
         [(= (keyword callback-origin) :all)
@@ -83,7 +83,7 @@
                  msg-origin))
          (= msg-origin callback-origin)]))
 
-(defn like-this-flyer?
+(defn ^:export like-this-flyer?
   "determines if the callback should be called based on the channel
 and the topic"
   [msg-topic msg-channel msg-origin
@@ -93,7 +93,7 @@ and the topic"
            (like-this-topic? msg-topic callback-topic)
            (like-this-origin? msg-origin callback-origin)]))
 
-(defn subscribe
+(defn ^:export subscribe
   "subscribe to broadcast messages"
   [& {:keys [window channel topic callback origin]
       :or {window default-window
@@ -103,7 +103,7 @@ and the topic"
            origin :all}
       :as sub}]
   (let [callback-wrapper
-        (fn [event]
+        (fn ^:export [event]
           (let [data (.-data (.getBrowserEvent event))
                 msg-js (try (.parse js/JSON data)
                             (catch js/Error e
@@ -112,9 +112,9 @@ and the topic"
                                    :data data}))
                 msg (js->clj msg-js)
                 ;;extract data from channel
-                msg-channel (or (.-channel msg-js) "FOREIGN")
-                msg-topic (or (.-topic msg-js) (default-message :topic))
-                msg-data (or (.-data msg-js) (default-message :data))
+                msg-channel (or (aget msg-js "channel") "FOREIGN")
+                msg-topic (or (aget msg-js "topic") (default-message :topic))
+                msg-data (or (aget msg-js "data") (default-message :data))
                 msg-origin (.-origin (.getBrowserEvent event))]
             (when (like-this-flyer? msg-topic msg-channel msg-origin
                                     topic channel origin)

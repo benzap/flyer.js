@@ -1,7 +1,7 @@
 (ns flyer.wrapper
   (:require [flyer.messaging :as msg]))
 
-(defn apply-js-obj
+(defn ^:export apply-js-obj
   "used to apply javascript object to function parameters"
   [f obj]
   (let [obj (js->clj obj :keywordize-keys true)
