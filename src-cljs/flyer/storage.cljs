@@ -2,6 +2,7 @@
   "includes functions for storing window information"
   (:require [flyer.utils :as utils]))
 
+(declare get-window-refs)
 
 (def storage (utils/get-main-parent))
 

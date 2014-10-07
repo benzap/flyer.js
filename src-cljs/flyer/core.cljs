@@ -6,7 +6,7 @@
 
 ;;always try and initialize window refs.
 ;;this way, we don't even need flyer.js in the parent window
-(s/init-window-refs)
+;;(s/init-window-refs)
 
 ;;if the window is external, we should re-register it for cases where
 ;;the window gets refreshed
