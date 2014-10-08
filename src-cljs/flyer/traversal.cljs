@@ -8,7 +8,7 @@
 (defn list-frame-windows
   "returns a list of all of the frames that the provided window has"
   [window]
-  (let [framelist (or (-> window .-frames) [])
+  (let [framelist (or (-> window .-frames) #js [])
         length (.-length framelist)]
     (loop [i 0
            list []]
