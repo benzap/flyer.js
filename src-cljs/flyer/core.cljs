@@ -12,7 +12,3 @@
 ;;the window gets refreshed
 (when (not (nil? (.-opener js/window)))
   (register-external))
-
-;;IE-shiv..., just in case
-(when (not (fn? (aget js/console "log")))
-  (aset js/console "log" (fn [x & xs] nil)))
