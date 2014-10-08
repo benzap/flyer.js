@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>readme</title>
-<!-- 2014-10-01 Wed 22:08 -->
+<!-- 2014-10-08 Wed 09:04 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Benjamin Zaporzan" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -55,6 +54,8 @@
   pre.src-sql:before   { content: 'SQL'; }
 
   table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
   th.right  { text-align: center;  }
   th.left   { text-align: center;   }
@@ -218,6 +219,7 @@ Here is a <a href="http://benzap.github.com/flyer.js">demo page</a>, which is in
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2"><span class="section-number-2">2</span> Features and Operation</h2>
 <div class="outline-text-2" id="text-2">
@@ -234,7 +236,6 @@ to specific topics being sent on that channel
 </ul>
 </div>
 </div>
-
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><span class="section-number-2">3</span> Javascript Configuration</h2>
 <div class="outline-text-2" id="text-3">
@@ -243,8 +244,8 @@ to specific topics being sent on that channel
 body
 <div class="org-src-container">
 
-<pre class="src src-html">&lt;<span style="color: #D65921;">script</span> <span style="color: #EFA252;">type</span>=<span style="color: #8CBED6;">"text/javascript"</span> <span style="color: #EFA252;">src</span>=<span style="color: #8CBED6;">"./js/flyer.js"</span>&gt;&lt;/<span style="color: #D65921;">script</span>&gt;
-&lt;<span style="color: #D65921;">script</span> <span style="color: #EFA252;">type</span>=<span style="color: #8CBED6;">"text/javascript"</span> <span style="color: #EFA252;">src</span>=<span style="color: #8CBED6;">"./js/flyer-wrapper.js"</span>&gt;&lt;/<span style="color: #D65921;">script</span>&gt;
+<pre class="src src-html">&lt;script type="text/javascript" src="./js/flyer.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="./js/flyer-wrapper.js"&gt;&lt;/script&gt;
 </pre>
 </div>
 
@@ -261,17 +262,15 @@ window references.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><span class="section-number-2">4</span> Download</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
-<li><a href="https://github.com/benzap/flyer.js/releases/tag/v1.0.3">Version 1.0.3</a>
+<li><a href="https://github.com/benzap/flyer.js/releases/tag/v1.0.4">Version 1.0.4</a>
 </li>
 </ul>
 </div>
 </div>
-
 <div id="outline-container-sec-5" class="outline-2">
 <h2 id="sec-5"><span class="section-number-2">5</span> Javascript API</h2>
 <div class="outline-text-2" id="text-5">
@@ -302,21 +301,20 @@ domain of your choosing.
 </dl>
 </div>
 </div>
-
 <div id="outline-container-sec-5-1-2" class="outline-4">
 <h4 id="sec-5-1-2"><span class="section-number-4">5.1.2</span> Examples</h4>
 <div class="outline-text-4" id="text-5-1-2">
 <div class="org-src-container">
 
 <pre class="src src-js">flyer.broadcast({
-  channel: <span style="color: #8CBED6;">"default"</span>,
-  topic: <span style="color: #8CBED6;">"person.insert"</span>,
-  data: {id: 1, name: <span style="color: #8CBED6;">"Ben"</span>}
+  channel: "default",
+  topic: "person.insert",
+  data: {id: 1, name: "Ben"}
 });
 
 flyer.broadcast({
-  channel: <span style="color: #8CBED6;">"default"</span>,
-  topic: <span style="color: #8CBED6;">"person.delete"</span>,
+  channel: "default",
+  topic: "person.delete",
   data: {id: 1}
 });
 </pre>
@@ -324,6 +322,7 @@ flyer.broadcast({
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-5-2" class="outline-3">
 <h3 id="sec-5-2"><span class="section-number-3">5.2</span> flyer.subscribe([Options])</h3>
 <div class="outline-text-3" id="text-5-2">
@@ -353,21 +352,20 @@ it can be set to <b>local</b>, or to another origin
 </dl>
 </div>
 </div>
-
 <div id="outline-container-sec-5-2-2" class="outline-4">
 <h4 id="sec-5-2-2"><span class="section-number-4">5.2.2</span> Examples</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <div class="org-src-container">
 
 <pre class="src src-js">flyer.subscribe({
-  channel: <span style="color: #8CBED6;">"default"</span>,
-  topic: <span style="color: #8CBED6;">"person.*"</span>,
-  <span style="color: #D65921;">callback</span>: <span style="color: #DEC77B;">function</span>(<span style="color: #EFA252;">data</span>, <span style="color: #EFA252;">topic</span>, <span style="color: #EFA252;">channel</span>) {
-    <span style="color: #DEC77B;">if</span> (topic == <span style="color: #8CBED6;">"person.insert"</span>) {
-      console.log(<span style="color: #8CBED6;">"Inserted Person! - "</span> + data.name);
+  channel: "default",
+  topic: "person.*",
+  callback: function(data, topic, channel) {
+    if (topic == "person.insert") {
+      console.log("Inserted Person! - " + data.name);
     }
-    <span style="color: #DEC77B;">else</span> <span style="color: #DEC77B;">if</span> (topic == <span style="color: #8CBED6;">"person.delete"</span>) {
-      console.log(<span style="color: #8CBED6;">"Removed Person with id - "</span> + data.id);
+    else if (topic == "person.delete") {
+      console.log("Removed Person with id - " + data.id);
     }
   }
 });
@@ -376,6 +374,7 @@ it can be set to <b>local</b>, or to another origin
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-5-3" class="outline-3">
 <h3 id="sec-5-3"><span class="section-number-3">5.3</span> flyer.window.open(url, name, [Options])</h3>
 <div class="outline-text-3" id="text-5-3">
@@ -389,6 +388,7 @@ it can be set to <b>local</b>, or to another origin
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-6" class="outline-2">
 <h2 id="sec-6"><span class="section-number-2">6</span> Clojurescript API (untested)</h2>
 <div class="outline-text-2" id="text-6">
@@ -417,7 +417,6 @@ also be <b>:local</b>, or a target origin of your choosing
 </dl>
 </div>
 </div>
-
 <div id="outline-container-sec-6-1-3" class="outline-4">
 <h4 id="sec-6-1-3"><span class="section-number-4">6.1.3</span> Example</h4>
 <div class="outline-text-4" id="text-6-1-3">
@@ -432,7 +431,6 @@ also be <b>:local</b>, or a target origin of your choosing
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-6-2" class="outline-3">
 <h3 id="sec-6-2"><span class="section-number-3">6.2</span> flyer.messaging/subscribe</h3>
 <div class="outline-text-3" id="text-6-2">
@@ -462,7 +460,6 @@ origin of your choice
 </dl>
 </div>
 </div>
-
 <div id="outline-container-sec-6-2-3" class="outline-4">
 <h4 id="sec-6-2-3"><span class="section-number-4">6.2.3</span> Example</h4>
 <div class="outline-text-4" id="text-6-2-3">
@@ -483,7 +480,6 @@ origin of your choice
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-6-3" class="outline-3">
 <h3 id="sec-6-3"><span class="section-number-3">6.3</span> flyer.window/open</h3>
 <div class="outline-text-3" id="text-6-3">
@@ -498,7 +494,6 @@ The window URL
 </p>
 </div>
 </div>
-
 <div id="outline-container-sec-6-3-3" class="outline-4">
 <h4 id="sec-6-3-3"><span class="section-number-4">6.3.3</span> name parameter</h4>
 <div class="outline-text-4" id="text-6-3-3">
@@ -507,7 +502,6 @@ The unique name you wish to give the window
 </p>
 </div>
 </div>
-
 <div id="outline-container-sec-6-3-4" class="outline-4">
 <h4 id="sec-6-3-4"><span class="section-number-4">6.3.4</span> Options</h4>
 <div class="outline-text-4" id="text-6-3-4">
@@ -516,7 +510,6 @@ key / value pairs of options equivalent to window.open options
 </p>
 </div>
 </div>
-
 <div id="outline-container-sec-6-3-5" class="outline-4">
 <h4 id="sec-6-3-5"><span class="section-number-4">6.3.5</span> Example</h4>
 <div class="outline-text-4" id="text-6-3-5">
@@ -529,6 +522,7 @@ key / value pairs of options equivalent to window.open options
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-7" class="outline-2">
 <h2 id="sec-7"><span class="section-number-2">7</span> Example</h2>
 <div class="outline-text-2" id="text-7">
@@ -537,6 +531,7 @@ key / value pairs of options equivalent to window.open options
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-8" class="outline-2">
 <h2 id="sec-8"><span class="section-number-2">8</span> Project Compilation</h2>
 <div class="outline-text-2" id="text-8">
@@ -557,7 +552,6 @@ key / value pairs of options equivalent to window.open options
 </ol>
 </div>
 </div>
-
 <div id="outline-container-sec-9" class="outline-2">
 <h2 id="sec-9"><span class="section-number-2">9</span> Issues</h2>
 <div class="outline-text-2" id="text-9">
@@ -584,9 +578,8 @@ page
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Benjamin Zaporzan</p>
-<p class="date">Created: 2014-10-01 Wed 22:08</p>
-<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.3a)</p>
+<p class="date">Created: 2014-10-08 Wed 09:04</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
