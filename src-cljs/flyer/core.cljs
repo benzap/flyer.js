@@ -10,4 +10,7 @@
 (when (not (nil? (.-opener js/window)))
   (register-external))
 
-
+;;places the flyer.wrapper.subscribe and flyer.wrapper.broadcast
+;;functions within flyer namespace.
+(js/goog.exportProperty (aget js/window "flyer") "subscribe", flyer.wrapper/subscribe)
+(js/goog.exportProperty (aget js/window "flyer") "broadcast", flyer.wrapper/broadcast)
