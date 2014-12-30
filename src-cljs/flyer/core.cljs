@@ -1,7 +1,8 @@
 (ns flyer.core
   (:use [flyer.window
          :only [register-external]])
-  (:require [flyer.utils :as utils]))
+  (:require [flyer.utils :as utils]
+            [flyer.wrapper]))
 
 (defonce VERSION "1.0.4")
 

@@ -34,7 +34,7 @@
     (.postMessage window data-json target-origin)))
   ([window msg] (window-post-message window msg "*")))
 
-(defn broadcast
+(defn ^:export broadcast
   "broadcast message to currently active frames"
   [& {:keys [data channel topic target]
       :or {data (:data default-message)
@@ -93,7 +93,7 @@ and the topic"
            (like-this-topic? msg-topic callback-topic)
            (like-this-origin? msg-origin callback-origin)]))
 
-(defn subscribe
+(defn ^:export subscribe
   "subscribe to broadcast messages"
   [& {:keys [window channel topic callback origin]
       :or {window default-window
