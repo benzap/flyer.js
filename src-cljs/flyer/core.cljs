@@ -12,3 +12,5 @@
 ;;the window gets refreshed
 (when (not (nil? (.-opener js/window)))
   (register-external))
+
+(defonce VERSION "1.0.4")

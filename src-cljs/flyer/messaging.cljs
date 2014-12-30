@@ -1,4 +1,5 @@
 (ns flyer.messaging
+  "Includes all of the desired messaging functions"
   (:require [flyer.traversal :as traversal]
             [goog.events :as events]))
 
@@ -26,8 +27,9 @@
   (let [data-js (clj->js msg)
         data-json (.stringify js/JSON data-js)
         target-origin (condp = (keyword target)
-                        :local (.-origin (.-location window))
+                        :local (-> window .-location .-origin)
                         :all "*"
+                        nil "*"
                         target)]
     (.postMessage window data-json target-origin)))
   ([window msg] (window-post-message window msg "*")))
@@ -47,8 +49,7 @@
          (window-post-message window msg target))))
 
 (defn ^:export create-broadcast-listener
-  "used to subscribe to the broadcast messages this takes advantage of
-  message postback"
+  "used to subscribe to the messages being broadcasted"
   ([window callback]
      (events/listen
       window (.-MESSAGE events/EventType) callback))
@@ -61,25 +62,24 @@
          (= msg-channel callback-channel)]))
 
 (defn ^:export like-this-topic?
+  "Checks if the given topic matches, and if it fails, attempts to
+  match the callback's topic to the msg topic as though it were a
+  regular expression"
   [msg-topic callback-topic]
   (some true?
         [(= callback-topic (default-message :topic))
          (= msg-topic callback-topic)
          ;;try and see if it's a regex
          (try 
-           (string? (re-matches
-                     (re-pattern callback-topic)
-                     msg-topic))
-           (catch js/Error e
-             ;;TODO: include warning when in debug mode
-             nil))]))
+           (-> callback-topic re-pattern (re-matches msg-topic) string?)
+           (catch js/Error e nil))]))
 
 (defn ^:export like-this-origin?
   [msg-origin callback-origin]
   (some true?
         [(= (keyword callback-origin) :all)
          (and (= (keyword callback-origin) :local)
-              (= (.-origin (.-location js/window))
+              (= (-> js/window .-location .-origin)
                  msg-origin))
          (= msg-origin callback-origin)]))
 
@@ -104,19 +104,26 @@ and the topic"
       :as sub}]
   (let [callback-wrapper
         (fn ^:export [event]
-          (let [data (.-data (.getBrowserEvent event))
-                msg-js (try (.parse js/JSON data)
-                            (catch js/Error e
-                              #js {:channel "FOREIGN"
-                                   :topic (default-message :topic)
-                                   :data data}))
+          (let [data (-> event .getBrowserEvent .-data)
+                
+                ;;Since we're hijacking window .postMessage, it's
+                ;;possible we'll come across foreign messages. In
+                ;;situations where that happens, this should grab the
+                ;;msg, and places it on the 'FOREIGN' channel with the
+                ;;default topic.
+                msg-js 
+                (try (.parse js/JSON data)
+                     (catch js/Error e
+                       #js {:channel "FOREIGN"
+                            :topic (default-message :topic)
+                            :data data}))
                 msg (js->clj msg-js)
                 ;;extract data from channel
                 msg-channel (or (aget msg-js "channel") "FOREIGN")
                 msg-topic (or (aget msg-js "topic") (default-message :topic))
                 msg-data (or (aget msg-js "data") (default-message :data))
-                msg-origin (.-origin (.getBrowserEvent event))]
-            (when (like-this-flyer? msg-topic msg-channel msg-origin
-                                    topic channel origin)
+                msg-origin (-> event .getBrowserEvent .-origin)
+                ]
+            (when (like-this-flyer? msg-topic msg-channel msg-origin topic channel origin)
               (callback msg-data msg-topic msg-channel msg-origin))))]
     (create-broadcast-listener js/window callback-wrapper)))
