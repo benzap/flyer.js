@@ -32,7 +32,7 @@
 	<iframe name="frame-1" src="./frame1-test.html" style=""></iframe>
 	<iframe name="frame-2" src="./frame2-test.html" style="right:0;"></iframe>
 
-	<script type="text/javascript" src="./js/flyer.js"></script>
+	<script type="text/javascript" src="./js/flyer.min.js"></script>
 	<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     <script type="text/javascript">
 	 var button = document.getElementById("main-button");
@@ -40,7 +40,7 @@
 	   "click",
 	   function(event) {
 		 flyer.broadcast({
-		   //target: "local",
+		   target: "local",
 		   topic: "general.button",
 		   data: {buttonId: "main-button",
 				  frame: "main"},
@@ -60,7 +60,7 @@
 	 
      flyer.subscribe({
 	   topic: "general.*",
-	   //origin: "local",
+	   origin: "local",
 	   callback: function(data, topic, channel, origin) {
 		 console.log("called from main");
 		 console.log("data: ", data);

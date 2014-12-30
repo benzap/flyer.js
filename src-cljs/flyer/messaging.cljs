@@ -21,7 +21,7 @@
   (.log js/console "callback-topic:" topic)
   (.log js/console "callback-channel:" channel))
 
-(defn ^:export window-post-message
+(defn window-post-message
   "performs the window postback"
   ([window msg target]
   (let [data-js (clj->js msg)
@@ -34,7 +34,7 @@
     (.postMessage window data-json target-origin)))
   ([window msg] (window-post-message window msg "*")))
 
-(defn ^:export broadcast
+(defn broadcast
   "broadcast message to currently active frames"
   [& {:keys [data channel topic target]
       :or {data (:data default-message)
@@ -48,20 +48,20 @@
     (doseq [window broadcast-list] 
          (window-post-message window msg target))))
 
-(defn ^:export create-broadcast-listener
+(defn create-broadcast-listener
   "used to subscribe to the messages being broadcasted"
   ([window callback]
      (events/listen
       window (.-MESSAGE events/EventType) callback))
   ([callback] (create-broadcast-listener default-window callback)))
 
-(defn ^:export like-this-channel? 
+(defn like-this-channel? 
   [msg-channel callback-channel]
   (some true? 
         [(= callback-channel (default-message :channel))
          (= msg-channel callback-channel)]))
 
-(defn ^:export like-this-topic?
+(defn like-this-topic?
   "Checks if the given topic matches, and if it fails, attempts to
   match the callback's topic to the msg topic as though it were a
   regular expression"
@@ -74,7 +74,7 @@
            (-> callback-topic re-pattern (re-matches msg-topic) string?)
            (catch js/Error e nil))]))
 
-(defn ^:export like-this-origin?
+(defn like-this-origin?
   [msg-origin callback-origin]
   (some true?
         [(= (keyword callback-origin) :all)
@@ -83,7 +83,7 @@
                  msg-origin))
          (= msg-origin callback-origin)]))
 
-(defn ^:export like-this-flyer?
+(defn like-this-flyer?
   "determines if the callback should be called based on the channel
 and the topic"
   [msg-topic msg-channel msg-origin
@@ -93,7 +93,7 @@ and the topic"
            (like-this-topic? msg-topic callback-topic)
            (like-this-origin? msg-origin callback-origin)]))
 
-(defn ^:export subscribe
+(defn subscribe
   "subscribe to broadcast messages"
   [& {:keys [window channel topic callback origin]
       :or {window default-window

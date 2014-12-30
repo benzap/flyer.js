@@ -5,9 +5,9 @@
   :license {:name "Apache License V2.0"
             :url "http://www.apache.org/licenses/"}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2356"
+                 [org.clojure/clojurescript "0.0-2511"
                   :exclusions [org.apache.ant/ant]]]
-  :plugins [[lein-cljsbuild "1.0.3"]]
+  :plugins [[lein-cljsbuild "1.0.4"]]
   :cljsbuild {:builds {:dev
                        {:source-paths ["src-cljs"]
                         :compiler {:output-to "resources/public/js/flyer.js"
