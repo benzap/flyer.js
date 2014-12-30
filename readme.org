@@ -15,27 +15,20 @@
     systems.
   - Messages are broadcasted to all frames and registered windows,
     regardless of whether or not they want them (hence, the name)
-  - Frames can subscribe to specific channels, and can pattern-match
-    to specific topics being sent on that channel
+  - Frames can subscribe to specific channels, and can regex-match
+    to broader topics being sent on that channel
 * Javascript Configuration
-  - Include /flyer.js/ and /flyer-wrapper.js/ at the end of your page
-    body
+  - Include /flyer.js/ at the end of your page body
     #+BEGIN_SRC html
 <script type="text/javascript" src="./js/flyer.js"></script>
-<script type="text/javascript" src="./js/flyer-wrapper.js"></script>
     #+END_SRC
-
-    The *flyer-wrapper* file is only necessary if you wish to refer to
-    the API functions from flyer, and not flyer.wrapper
-
   - In situations where you would use *window.open*, use
     *flyer.window.open* instead. This is required in order to track
     window references.
 * Download
-  - [[https://github.com/benzap/flyer.js/releases/tag/v1.0.4][Version 1.0.4]]
+  - [[https://github.com/benzap/flyer.js/releases/tag/v1.1.0][Version 1.1.0]]
 * Javascript API
 ** flyer.broadcast([Options])
-/if you aren't using flyer-wrapper, use flyer.wrapper.broadcast instead/
 *** Options
     - channel :: the channel you wish to broadcast on. default is "*",
                  which stands for *all channels*
@@ -44,7 +37,7 @@
     - data :: any JSON serializable object
     - target :: determines what type of target domain is expected to
                 receive this message. By default, the target is
-                *'all'*, but it can be set to *'local'*, or a target
+                "all", but it can be set to "local", or a target
                 domain of your choosing.
 *** Examples
     #+BEGIN_SRC js
@@ -62,7 +55,6 @@ flyer.broadcast({
     #+END_SRC
 
 ** flyer.subscribe([Options])
-/if you aren't using flyer-wrapper, use flyer.wrapper.subscribe instead/
 *** Options
     - channel :: the channel you wish to subscribe to. default is "*",
                  which stands for *all channels*
@@ -166,18 +158,18 @@ flyer.subscribe({
   4. type *lein deps*
   5. type *lein cljsbuild once*
   6. resulting *flyer.js* should now be present in
-     ./resources/public/js/, along with flyer-wrapper.js
+     ./resources/public/js/
 * Issues
   - In order to communicate with frames and windows that are within an
     external window, you need to replace *window.open* with
     *flyer.window.open*
-  - The size of *flyer.js* is quite big, at a whopping 500kb. This is
-    due to the nature of compilation. a flyer.min.js is in the works,
-    which should bring down the size by an order of magnitude.
+  - The size of *flyer.js* is quite big, at a whopping 1mb. This is
+    due to the nature of compilation. Use flyer.min.js to bring this
+    down to 100kb
   - Refreshing the parent window of an opened window will break any
-    messages from being broadcasted throughout the application. I
-    might include functionality to inform the external window of these
-    actions, so the external window can inform the user of what happened.
+    messages from being broadcasted throughout the application. This
+    is due to the external window frame losing its parent
+    (window.opener).
   - external windows can be refreshed without losing communications,
     however, it requires that flyer.js be included within that html
     page

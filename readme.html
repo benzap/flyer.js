@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>readme</title>
-<!-- 2014-10-08 Wed 09:04 -->
+<!-- 2014-12-30 Tue 14:04 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -230,8 +230,8 @@ systems.
 <li>Messages are broadcasted to all frames and registered windows,
 regardless of whether or not they want them (hence, the name)
 </li>
-<li>Frames can subscribe to specific channels, and can pattern-match
-to specific topics being sent on that channel
+<li>Frames can subscribe to specific channels, and can regex-match
+to broader topics being sent on that channel
 </li>
 </ul>
 </div>
@@ -240,21 +240,13 @@ to specific topics being sent on that channel
 <h2 id="sec-3"><span class="section-number-2">3</span> Javascript Configuration</h2>
 <div class="outline-text-2" id="text-3">
 <ul class="org-ul">
-<li>Include <i>flyer.js</i> and <i>flyer-wrapper.js</i> at the end of your page
-body
+<li>Include <i>flyer.js</i> at the end of your page body
 <div class="org-src-container">
 
 <pre class="src src-html">&lt;script type="text/javascript" src="./js/flyer.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="./js/flyer-wrapper.js"&gt;&lt;/script&gt;
 </pre>
 </div>
-
-<p>
-The <b>flyer-wrapper</b> file is only necessary if you wish to refer to
-the API functions from flyer, and not flyer.wrapper
-</p>
 </li>
-
 <li>In situations where you would use <b>window.open</b>, use
 <b>flyer.window.open</b> instead. This is required in order to track
 window references.
@@ -266,7 +258,7 @@ window references.
 <h2 id="sec-4"><span class="section-number-2">4</span> Download</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
-<li><a href="https://github.com/benzap/flyer.js/releases/tag/v1.0.4">Version 1.0.4</a>
+<li><a href="https://github.com/benzap/flyer.js/releases/tag/v1.1.0">Version 1.1.0</a>
 </li>
 </ul>
 </div>
@@ -277,11 +269,7 @@ window references.
 </div><div id="outline-container-sec-5-1" class="outline-3">
 <h3 id="sec-5-1"><span class="section-number-3">5.1</span> flyer.broadcast([Options])</h3>
 <div class="outline-text-3" id="text-5-1">
-<p>
-<i>if you aren't using flyer-wrapper, use flyer.wrapper.broadcast instead</i>
-</p>
-</div>
-<div id="outline-container-sec-5-1-1" class="outline-4">
+</div><div id="outline-container-sec-5-1-1" class="outline-4">
 <h4 id="sec-5-1-1"><span class="section-number-4">5.1.1</span> Options</h4>
 <div class="outline-text-4" id="text-5-1-1">
 <dl class="org-dl">
@@ -295,7 +283,7 @@ which stands for <b>all topics</b>
 </dd>
 <dt> target </dt><dd>determines what type of target domain is expected to
 receive this message. By default, the target is
-*'all'*, but it can be set to *'local'*, or a target
+"all", but it can be set to "local", or a target
 domain of your choosing.
 </dd>
 </dl>
@@ -326,11 +314,7 @@ flyer.broadcast({
 <div id="outline-container-sec-5-2" class="outline-3">
 <h3 id="sec-5-2"><span class="section-number-3">5.2</span> flyer.subscribe([Options])</h3>
 <div class="outline-text-3" id="text-5-2">
-<p>
-<i>if you aren't using flyer-wrapper, use flyer.wrapper.subscribe instead</i>
-</p>
-</div>
-<div id="outline-container-sec-5-2-1" class="outline-4">
+</div><div id="outline-container-sec-5-2-1" class="outline-4">
 <h4 id="sec-5-2-1"><span class="section-number-4">5.2.1</span> Options</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <dl class="org-dl">
@@ -547,7 +531,7 @@ key / value pairs of options equivalent to window.open options
 <li>type <b>lein cljsbuild once</b>
 </li>
 <li>resulting <b>flyer.js</b> should now be present in
-./resources/public/js/, along with flyer-wrapper.js
+./resources/public/js/
 </li>
 </ol>
 </div>
@@ -560,14 +544,14 @@ key / value pairs of options equivalent to window.open options
 external window, you need to replace <b>window.open</b> with
 <b>flyer.window.open</b>
 </li>
-<li>The size of <b>flyer.js</b> is quite big, at a whopping 500kb. This is
-due to the nature of compilation. a flyer.min.js is in the works,
-which should bring down the size by an order of magnitude.
+<li>The size of <b>flyer.js</b> is quite big, at a whopping 1mb. This is
+due to the nature of compilation. Use flyer.min.js to bring this
+down to 100kb
 </li>
 <li>Refreshing the parent window of an opened window will break any
-messages from being broadcasted throughout the application. I
-might include functionality to inform the external window of these
-actions, so the external window can inform the user of what happened.
+messages from being broadcasted throughout the application. This
+is due to the external window frame losing its parent
+(window.opener).
 </li>
 <li>external windows can be refreshed without losing communications,
 however, it requires that flyer.js be included within that html
@@ -578,7 +562,7 @@ page
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2014-10-08 Wed 09:04</p>
+<p class="date">Created: 2014-12-30 Tue 14:04</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

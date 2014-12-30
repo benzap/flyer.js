@@ -9,6 +9,4 @@ pom.xml.asc
 .lein-repl-history
 .lein-plugins/
 .lein-failures
-resources/public/js/flyer.js
-resources/public/js/flyer.min.js
-resources/public/js/flyer-wrapper.js
+resources/public/js/
