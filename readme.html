@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>readme</title>
-<!-- 2014-12-30 Tue 14:04 -->
+<!-- 2014-12-30 Tue 14:34 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -192,6 +192,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-7">7. Example</a></li>
 <li><a href="#sec-8">8. Project Compilation</a></li>
 <li><a href="#sec-9">9. Issues</a></li>
+<li><a href="#sec-10">10. Technical Details</a>
+<ul>
+<li><a href="#sec-10-1">10.1. How it works</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -326,7 +331,7 @@ which stands for <b>all topics</b>. Note that this can
 also be a string representation of a regex expression.
 </dd>
 <dt> callback </dt><dd>callback function of the form <b>function(data,
-[topic],[channel])</b> that you wish to call when the
+[topic], [channel] [origin])</b> that you wish to call when the
 subscription is made.
 </dd>
 <dt> origin </dt><dd>refers to the origin, or domain from which the
@@ -433,7 +438,7 @@ which stands for <b>all topics</b>. Note that this can
 also be a string representation of a regex expression.
 </dd>
 <dt> callback </dt><dd>callback function of the form <b>(fn [data] [topic]
-[channel] &#x2026;)</b> that you wish to call when the
+[channel] [origin])</b> that you wish to call when the
 subscription is made.
 </dd>
 <dt> origin </dt><dd>the origin you wish to subscribe to. This is decides
@@ -560,9 +565,91 @@ page
 </ul>
 </div>
 </div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Technical Details</h2>
+<div class="outline-text-2" id="text-10">
+</div><div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><span class="section-number-3">10.1</span> How it works</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+flyer.js works by hijacking window.postMessage, and the event
+generated, which can be attached to through the "message" event
+</p>
+
+<p>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window.postMessage">Mozilla API Page</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js">//attaching a listener to frame[0]
+window.frame[0].addEventListener("message", 
+  function(event) { 
+    console.log(event.data, event.origin)
+  });
+
+//posting a message to frame[0]
+window.frame[0].postMessage("some message", "*")
+</pre>
+</div>
+
+<p>
+It also does a few other things:
+</p>
+
+<ul class="org-ul">
+<li>generates a list of frames, by performing a traversal through all
+of the frames and external windows.     
+</li>
+<li>wraps the functionality into two sane functions.
+</li>
+</ul>
+
+<p>
+The full set of steps when performing a broadcast:
+</p>
+
+<ol class="org-ol">
+<li>Generate list of frames and external window frames (flyer.traversal)
+</li>
+<li>Generate a message, by stringifying a defined message object
+{channel:&#x2026;, topic:&#x2026;, data:&#x2026;} (flyer.messaging)
+</li>
+<li>For each frame, f, perform f.postMessage(msg, target)
+</li>
+</ol>
+
+<p>
+The full steps when performing a subscribe:
+</p>
+
+<ol class="org-ol">
+<li>Grab the callback function, and add a "message" event listener
+decorated with a set of rules
+<ul class="org-ul">
+<li>Does it have the same channel?
+</li>
+<li>Does it have the same topic?
+</li>
+<li>If it isn't the same topic, does the provided callback topic regex
+match the broadcasted topic?
+</li>
+<li>Does it have a lax origin, or is it accepting all origins?
+</li>
+</ul>
+</li>
+<li>If it passes the conditions in step 1, the main callback is
+called with the results of the broadcast. Further conditions can
+be provided at the developers discretion.
+</li>
+</ol>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2014-12-30 Tue 14:04</p>
+<p class="date">Created: 2014-12-30 Tue 14:34</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.7c)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -62,7 +62,7 @@ flyer.broadcast({
                which stands for *all topics*. Note that this can
                also be a string representation of a regex expression.
     - callback :: callback function of the form *function(data,
-                  [topic],[channel])* that you wish to call when the
+                  [topic], [channel] [origin])* that you wish to call when the
                   subscription is made.
     - origin :: refers to the origin, or domain from which the
                 messages will be received. The default is *all*, but
@@ -116,7 +116,7 @@ flyer.subscribe({
                which stands for *all topics*. Note that this can
                also be a string representation of a regex expression.
     - callback :: callback function of the form *(fn [data] [topic]
-                  [channel] ...)* that you wish to call when the
+                  [channel] [origin])* that you wish to call when the
                   subscription is made.
     - origin :: the origin you wish to subscribe to. This is decides
                 on the domain that messages can be received. The
@@ -174,3 +174,46 @@ flyer.subscribe({
     however, it requires that flyer.js be included within that html
     page
 
+* Technical Details
+** How it works
+   flyer.js works by hijacking window.postMessage, and the event
+   generated, which can be attached to through the "message" event
+
+   [[https://developer.mozilla.org/en-US/docs/Web/API/Window.postMessage][Mozilla API Page]]
+
+   #+BEGIN_SRC js
+//attaching a listener to frame[0]
+window.frame[0].addEventListener("message", 
+  function(event) { 
+    console.log(event.data, event.origin)
+  });
+
+//posting a message to frame[0]
+window.frame[0].postMessage("some message", "*")
+   #+END_SRC
+
+   It also does a few other things:
+
+   - generates a list of frames, by performing a traversal through all
+     of the frames and external windows.     
+   - wraps the functionality into two sane functions.
+
+   The full set of steps when performing a broadcast:
+
+   1. Generate list of frames and external window frames (flyer.traversal)
+   2. Generate a message, by stringifying a defined message object
+      {channel:..., topic:..., data:...} (flyer.messaging)
+   3. For each frame, f, perform f.postMessage(msg, target)
+
+   The full steps when performing a subscribe:
+
+   1. Grab the callback function, and add a "message" event listener
+      decorated with a set of rules
+      - Does it have the same channel?
+      - Does it have the same topic?
+      - If it isn't the same topic, does the provided callback topic regex
+        match the broadcasted topic?
+      - Does it have a lax origin, or is it accepting all origins?
+   2. If it passes the conditions in step 1, the main callback is
+      called with the results of the broadcast. Further conditions can
+      be provided at the developers discretion.
