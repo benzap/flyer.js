@@ -4,7 +4,7 @@
   (:require [flyer.utils :as utils]
             [flyer.wrapper]))
 
-(defonce VERSION "1.0.4")
+(defonce VERSION "1.1.0")
 
 ;;if the window is external, we should re-register it for cases where
 ;;the window gets refreshed

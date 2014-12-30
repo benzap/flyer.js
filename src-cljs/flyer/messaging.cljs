@@ -14,14 +14,14 @@
   referenced"
   js/window)
 
-(defn default-callback 
+(defn ^:export default-callback 
   "default callback for testing"
   [data topic channel]
   (.log js/console "callback-data:" data)
   (.log js/console "callback-topic:" topic)
   (.log js/console "callback-channel:" channel))
 
-(defn window-post-message
+(defn ^:export window-post-message
   "performs the window postback"
   ([window msg target]
   (let [data-js (clj->js msg)
@@ -83,7 +83,7 @@
                  msg-origin))
          (= msg-origin callback-origin)]))
 
-(defn like-this-flyer?
+(defn ^:export like-this-flyer?
   "determines if the callback should be called based on the channel
 and the topic"
   [msg-topic msg-channel msg-origin
