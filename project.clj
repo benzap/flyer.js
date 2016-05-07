@@ -1,4 +1,4 @@
-(defproject org.clojars.benzap/flyer "1.1.0"
+(defproject flyer "1.1.0-SNAPSHOT"
   :description "Clojurescript + Javascript Broadcast Messaging between
   iFrames, Framesets, and Windows"
   :url "https://github.com/benzap/flyer.js"
@@ -10,6 +10,7 @@
   :plugins [[lein-cljsbuild "1.0.4"]]
   :hooks [leiningen.cljsbuild]
   :repositories [["clojars" {:sign-releases false}]]
+  :source-paths ["src-cljs"]
   :cljsbuild {:builds {:dev
                        {:source-paths ["src-cljs"]
                         :compiler {:output-dir "resources/public/js"
