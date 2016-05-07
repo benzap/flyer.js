@@ -10,6 +10,28 @@
 
   Here is a [[http://benzap.github.com/flyer.js][demo page]], which is in the works.
 
+  [[https://img.shields.io/clojars/v/org.clojars.benzap/flyer.svg]]
+  
+* Including flyer in your clojurescript project
+** Leiningen
+#+BEGIN_SRC clojure
+   [org.clojars.benzap/flyer "1.1.0"]
+#+END_SRC
+
+** Gradle
+#+BEGIN_SRC sh
+compile "org.clojars.benzap:flyer:1.1.0"
+#+END_SRC
+
+** Maven
+#+BEGIN_SRC xml
+<dependency>
+  <groupId>org.clojars.benzap</groupId>
+  <artifactId>flyer</artifactId>
+  <version>1.1.0</version>
+</dependency>
+#+END_SRC
+
 * Features and Operation
   - Simple API, from which you can build more elaborate messaging
     systems.
