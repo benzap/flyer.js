@@ -9,6 +9,7 @@
                   :exclusions [org.apache.ant/ant]]]
   :plugins [[lein-cljsbuild "1.0.4"]]
   :hooks [leiningen.cljsbuild]
+  :repositories [["clojars" {:sign-releases false}]]
   :cljsbuild {:builds {:dev
                        {:source-paths ["src-cljs"]
                         :compiler {:output-dir "resources/public/js"
