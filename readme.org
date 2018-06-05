@@ -8,19 +8,23 @@
   It provides broadcast messaging between frames, iframes, and
   windows.
 
-  Here is a [[http://benzap.github.com/flyer.js][demo page]], which is in the works.
-
   [[https://img.shields.io/clojars/v/flyer.svg]]
   
 * Including flyer in your clojurescript project
 ** Leiningen
 #+BEGIN_SRC clojure
-   [flyer "1.1.0-SNAPSHOT"]
+   [flyer "1.1.1"]
+#+END_SRC
+
+** Clojure CLI/deps.edn
+
+#+BEGIN_SRC clojure
+   flyer {:mvn/version "1.1.1"}
 #+END_SRC
 
 ** Gradle
 #+BEGIN_SRC sh
-compile "flyer:flyer:1.1.0-SNAPSHOT"
+compile 'flyer:flyer:1.1.1'
 #+END_SRC
 
 ** Maven
@@ -28,7 +32,7 @@ compile "flyer:flyer:1.1.0-SNAPSHOT"
 <dependency>
   <groupId>flyer</groupId>
   <artifactId>flyer</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
 </dependency>
 #+END_SRC
 
@@ -48,7 +52,7 @@ compile "flyer:flyer:1.1.0-SNAPSHOT"
     *flyer.window.open* instead. This is required in order to track
     window references.
 * Download
-  - [[https://github.com/benzap/flyer.js/releases/tag/v1.1.0][Version 1.1.0]]
+  - [[https://github.com/benzap/flyer.js/releases/tag/v1.1.1][Version 1.1.1]]
 * Javascript API
 ** flyer.broadcast([Options])
 *** Options
@@ -171,15 +175,14 @@ flyer.subscribe({
     #+END_SRC
 
 * Example
-  [[http://benzap.github.io/flyer.js][Demo Page]]
+  /Examples Outdated/
 
 * Project Compilation
   1. Clone this Repository
   2. Install [[http://leiningen.org/][Leiningen]]
   3. cd into flyer.js directory
   4. type *lein deps*
-  5. type *lein cljsbuild once*
-  6. resulting *flyer.js* should now be present in
+  5. resulting *flyer.js* should now be present in
      ./resources/public/js/
 * Issues
   - In order to communicate with frames and windows that are within an
