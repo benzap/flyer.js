@@ -67,9 +67,8 @@
 
 (defn like-this-channel? 
   [msg-channel callback-channel]
-  (some true? 
-        [(= callback-channel (default-message :channel))
-         (= msg-channel callback-channel)]))
+  (or (= callback-channel (default-message :channel))
+      (= msg-channel callback-channel)))
 
 
 (defn like-this-topic?
@@ -97,13 +96,13 @@
 
 (defn ^:export like-this-flyer?
   "determines if the callback should be called based on the channel
-and the topic"
+  and the topic"
   [msg-topic msg-channel msg-origin
    callback-topic callback-channel callback-origin]
-  (every? true? 
-          [(like-this-channel? msg-channel callback-channel)
-           (like-this-topic? msg-topic callback-topic)
-           (like-this-origin? msg-origin callback-origin)]))
+  (and
+   (like-this-channel? msg-channel callback-channel)
+   (like-this-topic? msg-topic callback-topic)
+   (like-this-origin? msg-origin callback-origin)))
 
 
 (defn ^:export subscribe
@@ -136,8 +135,8 @@ and the topic"
                 msg-channel (or (aget msg-js "channel") "FOREIGN")
                 msg-topic (or (aget msg-js "topic") (default-message :topic))
                 msg-data (or (aget msg-js "data") (default-message :data))
-                msg-origin (-> event .getBrowserEvent .-origin)
-                ]
+                msg-origin (-> event .getBrowserEvent .-origin)]
+
             (when (like-this-flyer? msg-topic msg-channel msg-origin topic channel origin)
               (callback msg-data msg-topic msg-channel msg-origin))))]
     (create-broadcast-listener js/window callback-wrapper)))
