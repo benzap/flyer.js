@@ -4,12 +4,15 @@
   (:require [flyer.utils :as utils]
             [flyer.wrapper]))
 
+
 (defonce VERSION "1.1.2")
+
 
 ;;if the window is external, we should re-register it for cases where
 ;;the window gets refreshed
 (when (not (nil? (.-opener js/window)))
   (register-external))
+
 
 ;;places the flyer.wrapper.subscribe and flyer.wrapper.broadcast
 ;;functions within flyer namespace.

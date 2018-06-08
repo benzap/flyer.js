@@ -5,6 +5,7 @@
             [flyer.utils :as utils]
             [flyer.storage :as storage]))
 
+
 (defn list-frame-windows
   "returns a list of all of the frames that the provided window has"
   [window]
@@ -17,14 +18,18 @@
                (conj list (aget framelist i)))
         list))))
 
+
 (defn list-external-windows
   "returns a list of all external windows linked to the current
   window" 
   []
   (vec (storage/get-window-refs)))
 
+
 (defn generate-broadcast-list
-  "generates a list of windows that we wish to send the message to"
+  "generates a list of windows that we wish to send the message to.
+
+  TODO: Replace with mapcat? Consider using specter for traversal?"
   ([current-window]
      (let [current-frame-list 
            (list-frame-windows current-window)
