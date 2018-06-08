@@ -13,18 +13,18 @@
 * Including flyer in your clojurescript project
 ** Leiningen
 #+BEGIN_SRC clojure
-   [flyer "1.1.1"]
+   [flyer "1.1.2"]
 #+END_SRC
 
 ** Clojure CLI/deps.edn
 
 #+BEGIN_SRC clojure
-   flyer {:mvn/version "1.1.1"}
+   flyer {:mvn/version "1.1.2"}
 #+END_SRC
 
 ** Gradle
 #+BEGIN_SRC sh
-compile 'flyer:flyer:1.1.1'
+compile 'flyer:flyer:1.1.2'
 #+END_SRC
 
 ** Maven
@@ -32,7 +32,7 @@ compile 'flyer:flyer:1.1.1'
 <dependency>
   <groupId>flyer</groupId>
   <artifactId>flyer</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
 </dependency>
 #+END_SRC
 
@@ -52,7 +52,7 @@ compile 'flyer:flyer:1.1.1'
     *flyer.window.open* instead. This is required in order to track
     window references.
 * Download
-  - [[https://github.com/benzap/flyer.js/releases/tag/v1.1.1][Version 1.1.1]]
+  - [[https://github.com/benzap/flyer.js/releases/tag/v1.1.2][Version 1.1.2]]
 * Javascript API
 ** flyer.broadcast([Options])
 *** Options
