@@ -8,7 +8,7 @@
   It provides broadcast messaging between frames, iframes, and
   windows.
 
-  [[https://img.shields.io/clojars/v/flyer.svg]]
+  [[https://clojars.org/flyer][https://img.shields.io/clojars/v/flyer.svg]]
   
 * Including flyer in your clojurescript project
 ** Leiningen
